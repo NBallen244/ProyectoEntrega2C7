@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 @Table(name="ciudades")
 public class Ciudad {
 
-     @Id
+    @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
     private Integer id;
 

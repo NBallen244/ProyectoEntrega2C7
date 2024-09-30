@@ -22,7 +22,7 @@ public interface OrdenRepository extends JpaRepository<Orden, Integer>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ordenes (id, estado, fecha_estimada, proveedor, bodega_destino) VALUES(proyecto_sequence.nextval, :estado, :fecha_estimada, :proveedor, :bodega_destino)", nativeQuery = true)
+    @Query(value = "INSERT INTO ordenes (id, estado, fecha_estimada, proveedor, bodega_destino) VALUES(paso.nextval, :estado, :fecha_estimada, :proveedor, :bodega_destino)", nativeQuery = true)
     void insertarOrden(@Param("fecha_estimada")Date fecha_estimada, 
     @Param("proveedor")Integer proveedor, @Param("bodega_destino")Integer bodega_destino);
 
