@@ -16,11 +16,11 @@ public interface AlmacenajeRepository extends JpaRepository<Almacenaje, Almacena
         Collection<Almacenaje> darAlmacenajes();
 
     
-    @Query(value = "SELECT * FROM almacenajes WHERE bodega = :bodega AND producto = : producto", nativeQuery = true)
-    Almacenaje darAlmacenaje(@Param("bodega") Integer bodega);
+    @Query(value = "SELECT * FROM almacenajes WHERE bodega = :bodega AND producto = :producto", nativeQuery = true)
+    Almacenaje darAlmacenaje(@Param("bodega") Integer bodega, @Param("producto") Integer producto);
 
     @Query(value = "SELECT * FROM almacenajes WHERE bodega = :bodega", nativeQuery = true)
-    Collection<Almacenaje> darAlmacenajesPorBodega(@Param("bodega") Integer bodega, @Param("producto") Integer producto);
+    Collection<Almacenaje> darAlmacenajesPorBodega(@Param("bodega") Integer bodega);
 
     @Query(value = "SELECT * FROM almacenajes WHERE producto = :producto", nativeQuery = true)
     Collection<Almacenaje> darAlmacenajesPorProducto(@Param("producto") Integer producto);
@@ -33,7 +33,7 @@ public interface AlmacenajeRepository extends JpaRepository<Almacenaje, Almacena
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM almacenajes WHERE bodega = :bodega AND producto = : producto", nativeQuery = true)
+    @Query(value = "DELETE FROM almacenajes WHERE bodega = :bodega AND producto = :producto", nativeQuery = true)
     void eliminarAlmacenaje(@Param("bodega") Integer bodega, @Param("producto") Integer producto);
 
     @Modifying
@@ -43,12 +43,12 @@ public interface AlmacenajeRepository extends JpaRepository<Almacenaje, Almacena
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM almacenajes WHERE bodega = :bodega", nativeQuery = true)
-    void eliminarAlmacenajePorProducto(@Param("bodega") Integer bodega);
+    @Query(value = "DELETE FROM almacenajes WHERE producto = :producto", nativeQuery = true)
+    void eliminarAlmacenajePorProducto(@Param("producto") Integer producto);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE almacenajes SET costo_promedio = :costo_promedio, capacidad = :capacidad, cantidad = :cantidad, nivel_minimo =: nivel_minimo WHERE bodega = :bodega AND producto =: producto", nativeQuery = true)
+    @Query(value = "UPDATE almacenajes SET costo_promedio = :costo_promedio, capacidad = :capacidad, cantidad = :cantidad, nivel_minimo = :nivel_minimo WHERE bodega = :bodega AND producto = :producto", nativeQuery = true)
     void actualizarAlmacenaje(@Param("bodega") Integer bodega, @Param("producto") Integer producto, @Param("capacidad") Integer capacidad,
                     @Param("cantidad") Integer cantidad, @Param("costo_promedio") Integer costo_promedio,
                     @Param("nivel_minimo") Integer nivel_minimo);

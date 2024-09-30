@@ -37,6 +37,6 @@ public interface ProductoRepository extends JpaRepository <Producto, Integer>{
 
     @Modifying
     @Transactional
-    @Query(value = "DELET FROM productos WHERE cod_barras = :cod_barras", nativeQuery = true)
-    void eliminarProducto(@Param("id") Integer cod_barras);
+    @Query(value = "DELETE FROM productos WHERE cod_barras = :cod_barras", nativeQuery = true)
+    void eliminarProducto(@Param("cod_barras") Integer cod_barras);
 }
