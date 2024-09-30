@@ -1,6 +1,6 @@
 package uniandes.edu.co.proyecto.repositorio;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,14 +23,20 @@ public interface OrdenRepository extends JpaRepository<Orden, Integer>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ordenes (estado, fecha_estimada, fecha_llegada, fecha_creacion, proveedor, bodega_destino) VALUES(proyecto_sequence.nextval, :estado, :fecha_estimada, :fecha_llegada, :fecha_creacion, :proveedor, :bodega_destino)", nativeQuery = true)
-    void insertarOrden(@Param("estado")String estado, @Param("fecha_estimada")Date fecha_estimada, @Param("fecha_llegada")Date fecha_llegada, @Param("fecha_creacion")Date fecha_creacion, 
+    @Query(value = "INSERT INTO ordenes (id, estado, fecha_estimada, proveedor, bodega_destino) VALUES(proyecto_sequence.nextval, :estado, :fecha_estimada, :proveedor, :bodega_destino)", nativeQuery = true)
+    void insertarOrden(@Param("fecha_estimada")Date fecha_estimada, 
     @Param("proveedor")Proveedor proveedor, @Param("bodega_destino")Bodega bodega_destino);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE ordenes SET estado=:estado, fecha_estimada=:fecha_estimada,fecha_llegada=:fecha_llegada,fecha_creacion=:fecha_creacion,proveedor=:proveedor,bodega_destino=:bodega_destino WHERE id = :id", nativeQuery = true)
-    void actualizarOrden(@Param("id") Long id, @Param("estado")String estado, @Param("fecha_estimada")Date fecha_estimada, @Param("fecha_llegada")Date fecha_llegada, @Param("fecha_creacion")Date fecha_creacion, 
+    @Query(value = "UPDATE ordenes SET estado=:'anulada', fecha_estimada=:fecha_estimada,fecha_llegada=:fecha_llegada,fecha_creacion=:fecha_creacion,proveedor=:proveedor,bodega_destino=:bodega_destino WHERE id = :id AND estado IS NOT 'entregada' ", nativeQuery = true)
+    void actualizarOrdenAnulada(@Param("id") Integer id, @Param("fecha_estimada")Date fecha_estimada, @Param("fecha_llegada")Date fecha_llegada, @Param("fecha_creacion")Date fecha_creacion, 
+    @Param("proveedor")Proveedor proveedor, @Param("bodega_destino")Bodega bodega_destino);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE ordenes SET estado=:'entregada', fecha_estimada=:fecha_estimada,fecha_llegada=:fecha_llegada,fecha_creacion=:fecha_creacion,proveedor=:proveedor,bodega_destino=:bodega_destino WHERE id = :id AND estado IS NOT 'anulada' ", nativeQuery = true)
+    void actualizarOrdenEntregada(@Param("id") Integer id, @Param("fecha_estimada")Date fecha_estimada, @Param("fecha_llegada")Date fecha_llegada, @Param("fecha_creacion")Date fecha_creacion, 
     @Param("proveedor")Proveedor proveedor, @Param("bodega_destino")Bodega bodega_destino);
 
 

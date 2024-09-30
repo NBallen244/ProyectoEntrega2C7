@@ -31,7 +31,7 @@ public class OrdenController {
     @PostMapping("/ordenes/new/save")
     public ResponseEntity<String> ordenGuardar(@RequestBody Orden norden) {
         try{
-            ordenRepository.insertarOrden(norden.getEstado(), norden.getFechaEstimada(), norden.getFechaLlegada(), norden.getFechaCreacion(), norden.getProveedor(), norden.getBodegaDestino());
+            ordenRepository.insertarOrden(norden.getFechaEstimada(), norden.getProveedor(), norden.getBodegaDestino());
             return new ResponseEntity<>("Orden creada exitosamente", HttpStatus.CREATED);
         }
         catch(Exception e){
@@ -41,26 +41,14 @@ public class OrdenController {
     }
     
     @GetMapping("/ordenes/{id}/edit/save")
-    public ResponseEntity<String> ordenEditarGuardar(@PathVariable("id")Long id, @RequestBody Orden orden){
+    public ResponseEntity<String> ordenAnularGuardar(@PathVariable("id")Integer id, @RequestBody Orden orden){
         try{
-            ordenRepository.actualizarOrden(id, orden.getEstado(), orden.getFechaEstimada(), orden.getFechaLlegada(), orden.getFechaCreacion(), orden.getProveedor(), orden.getBodegaDestino());
+            ordenRepository.actualizarOrdenAnulada(id, orden.getFechaEstimada(), orden.getFechaLlegada(), orden.getFechaCreacion(), orden.getProveedor(), orden.getBodegaDestino());
             return new ResponseEntity<>("Orden actualizada exitosamente", HttpStatus.OK);
         }
         catch(Exception e){
             return new ResponseEntity<>("Error al actualizar la orden", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @GetMapping("/ordenes/{id}/delete")
-    public ResponseEntity<String> ordenEliminar(@PathVariable("id") Long id) {
-        try{
-            ordenRepository.eliminarOrden(id);
-            return new ResponseEntity<>("Orden eliminada exitosamente", HttpStatus.OK);
-        }
-        catch(Exception e){
-            return new ResponseEntity<>("Error al eliminar la orden", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        
     }
     
     

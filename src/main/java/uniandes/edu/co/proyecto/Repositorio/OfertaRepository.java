@@ -24,16 +24,12 @@ public interface OfertaRepository extends JpaRepository <Oferta, OfertaPK>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ordenes (proveedor, producto) VALUES(proyecto_sequence.nextval, :proveedor, :producto)", nativeQuery = true)
-    void insertarOferta(@Param("proveedor")Proveedor proveedor, @Param("producto")Producto producto);
+    @Query(value = "INSERT INTO ofertas (proveedor, producto) VALUES( :proveedor, :producto)", nativeQuery = true)
+    void insertarOferta(@Param("proveedor")Integer proveedor, @Param("producto")Integer producto);
+
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE ofertas SET proveedor=:proveedor, producto=:producto WHERE id = :id", nativeQuery = true)
-    void actualizarOferta(@Param("id") Long id, @Param("proveedor")Proveedor proveedor, @Param("producto")Producto producto);
-
-    @Modifying
-    @Transactional
-    @Query(value = "DELET FROM ofertas WHERE id = :id", nativeQuery = true)
-    void eliminarOferta(@Param("id") Long id);
+    @Query(value = "DELET FROM ofertas WHERE proveedor = :proveedor AND producto = :producto", nativeQuery = true)
+    void eliminarOferta(@Param("proveedor") Proveedor proveedor, @Param("producto") Producto producto);
 }

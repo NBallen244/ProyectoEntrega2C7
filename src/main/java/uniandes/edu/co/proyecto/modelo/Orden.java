@@ -9,7 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="ordenes")
@@ -37,11 +37,11 @@ public class Orden {
 
     public Orden(){;}
 
-    public Orden(String estado, Date fecha_estimada, Date fecha_llegada, Date fecha_creacion, Proveedor proveedor, Bodega bodega_destino){
-        this.estado = estado;
+    public Orden(Date fecha_estimada, Proveedor proveedor, Bodega bodega_destino){
+        this.estado = "vigente";
         this.fecha_estimada = fecha_estimada;
-        this.fecha_llegada = fecha_llegada;
-        this.fecha_creacion = fecha_creacion;
+        this.fecha_llegada = null;
+        this.fecha_creacion = new Date();
         this.proveedor = proveedor;
         this.bodega_destino = bodega_destino;
         

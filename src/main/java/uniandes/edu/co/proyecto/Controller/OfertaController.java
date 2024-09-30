@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Oferta;
 import uniandes.edu.co.proyecto.modelo.OfertaPK;
+import uniandes.edu.co.proyecto.modelo.Producto;
+import uniandes.edu.co.proyecto.modelo.Proveedor;
 import uniandes.edu.co.proyecto.repositorio.OfertaRepository;
 
 @RestController
@@ -30,7 +32,7 @@ public class OfertaController {
     public ResponseEntity<String> ofertaGuardar(@RequestBody Oferta oferta) {
         try{
             OfertaPK pk = oferta.getPk();
-            ofertaRepository.insertarOferta(pk.getProveedor(), pk.getProducto());
+            ofertaRepository.insertarOferta(pk.getProveedor().getNIT(), pk.getProducto().getCodigoBarras());
             return new ResponseEntity<>("Oferta creada exitosamente", HttpStatus.CREATED);
         }
         catch(Exception e){
@@ -39,22 +41,11 @@ public class OfertaController {
         
     }
 
-    @GetMapping("/ofertas/{id}/edit/save")
-    public ResponseEntity<String> ofertaEditarGuardar(@PathVariable("id")Long id, @RequestBody Oferta oferta){
-        try{
-            OfertaPK pk = oferta.getPk();
-            ofertaRepository.actualizarOferta(id, pk.getProveedor(), pk.getProducto());
-            return new ResponseEntity<>("Oferta actualizada exitosamente", HttpStatus.OK);
-        }
-        catch(Exception e){
-            return new ResponseEntity<>("Error al actualizar la oferta", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     @GetMapping("/ofertas/{id}/delete")
-    public ResponseEntity<String> ofertaEliminar(@PathVariable("id") Long id) {
+    public ResponseEntity<String> ofertaEliminar(@PathVariable("proveedor") Proveedor proveedor, @PathVariable("producto") Producto producto) {
         try{
-            ofertaRepository.eliminarOferta(id);
+            ofertaRepository.eliminarOferta(proveedor, producto);
             return new ResponseEntity<>("Oferta eliminada exitosamente", HttpStatus.OK);
         }
         catch(Exception e){
