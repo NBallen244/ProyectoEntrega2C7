@@ -42,7 +42,7 @@ public class ProveedoresController {
         }
     }
 
-    @PostMapping("/proveedores/{id}/edit/save")
+    @PostMapping("/proveedores/{nit}/edit/save")
     public ResponseEntity<String> proveedorEditarGuardar(@PathVariable("nit") Integer nit, @RequestBody Proveedor proveedor) {
         try {
             proveedorRepository.actualizarProveedor(nit, proveedor.getNombre(), proveedor.getContacto(), proveedor.getTelefono(), proveedor.getDireccion());
