@@ -9,11 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import uniandes.edu.co.proyecto.modelo.Oferta;
+import uniandes.edu.co.proyecto.modelo.OfertaPK;
 import uniandes.edu.co.proyecto.modelo.Producto;
 import uniandes.edu.co.proyecto.modelo.Proveedor;
 
 
-public interface OfertaRepository extends JpaRepository <Oferta, Integer>{
+public interface OfertaRepository extends JpaRepository <Oferta, OfertaPK>{
 
     @Query(value = "SELECT * FROM ofertas", nativeQuery=true )
     Collection<Oferta> darOfertas();
