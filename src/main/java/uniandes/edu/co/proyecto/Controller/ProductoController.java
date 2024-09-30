@@ -37,7 +37,7 @@ public class ProductoController {
     }
 
     @GetMapping("/productos/{id}/edit/save")
-    public ResponseEntity<String> ordenEditarGuardar(@PathVariable("id")Long id, @RequestBody Producto producto){
+    public ResponseEntity<String> ordenEditarGuardar(@PathVariable("id")Integer id, @RequestBody Producto producto){
         try{
             productoRepository.actualizarProducto(id, producto.getNombre(), producto.getCostoBodega(), producto.getPrecioUnitario(), producto.getPresentacion(), producto.getPeso(),  producto.getVolumen(), producto.getUnidadMedida(), producto.getCantidadPresentacion(),  producto.getFechaVencimiento(), producto.getCategoria().getCodigo());
             return new ResponseEntity<>("Producto actualizado exitosamente", HttpStatus.OK);

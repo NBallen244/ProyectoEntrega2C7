@@ -1,6 +1,6 @@
 package uniandes.edu.co.proyecto.modelo;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 import jakarta.persistence.Entity;

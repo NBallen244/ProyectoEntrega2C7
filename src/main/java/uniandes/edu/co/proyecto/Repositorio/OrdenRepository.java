@@ -1,6 +1,6 @@
 package uniandes.edu.co.proyecto.repositorio;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
