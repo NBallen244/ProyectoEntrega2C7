@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import uniandes.edu.co.proyecto.Repositorio.ProductoRepository;
 import uniandes.edu.co.proyecto.modelo.Producto;
+import uniandes.edu.co.proyecto.repositorio.ProductoRepository;
 
 @RestController
 public class ProductoController {

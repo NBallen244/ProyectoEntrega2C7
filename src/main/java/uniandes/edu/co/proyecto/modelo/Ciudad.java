@@ -12,7 +12,7 @@ public class Ciudad {
 
      @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
-    private Integer codigo;
+    private Integer id;
 
     private String nombre;
 
@@ -21,7 +21,24 @@ public class Ciudad {
     public Ciudad(String nombre){
         this.nombre = nombre;
     }
-     //TODO: GETTERS Y SETTERS
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
 
 }
 

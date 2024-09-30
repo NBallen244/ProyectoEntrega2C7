@@ -45,8 +45,6 @@ public class Producto {
 
     public Producto(){;}
 
-    //repo y controller
-
     public Producto(String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer peso, Integer volumen, String unidadMedida, Integer cantidadPresentacion,  Date fecha_vencimiento, Categoria categoria){
         
         this.nombre = nombre;
@@ -114,5 +112,45 @@ public class Producto {
         this.cod_barras = cod_barras;
     }
 
-    
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+
+    public void setCostoBodega(Integer costo_bodega){
+        this.costo_bodega = costo_bodega;
+    }
+
+    public void setPrecioUnitario(Integer precio_unitario){
+        this.precio_unitario = precio_unitario;
+    }
+
+    public void setPresentacion(String presentacion){
+        this.presentacion = presentacion;
+    }
+
+    public void setPeso(Integer peso){
+        this.peso = peso;
+    }
+
+    public void setVolumen(Integer volumen){
+        this.volumen = volumen;
+    }
+
+    public void setUnidadMedida(String unidad_medida){
+        this.unidad_medida = unidad_medida;
+    }
+
+    public void setCantidadPresentacion(Integer cantidad_presentacion){
+        this.cantidad_presentacion = cantidad_presentacion;
+    }
+
+    public void setFechaVencimiento(Date fecha_vencimiento){
+        this.fecha_vencimiento = fecha_vencimiento;
+    }
+
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
+    }
+
+
 }

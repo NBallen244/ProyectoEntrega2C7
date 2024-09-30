@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
 
@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import uniandes.edu.co.proyecto.Repositorio.OrdenRepository;
 import uniandes.edu.co.proyecto.modelo.Orden;
+import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
