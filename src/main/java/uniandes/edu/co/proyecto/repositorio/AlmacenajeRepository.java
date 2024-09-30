@@ -25,6 +25,10 @@ public interface AlmacenajeRepository extends JpaRepository<Almacenaje, Almacena
     @Query(value = "SELECT * FROM almacenajes WHERE producto = :producto", nativeQuery = true)
     Collection<Almacenaje> darAlmacenajesPorProducto(@Param("producto") Integer producto);
 
+    @Query(value = "SELECT bodega, (productos.volumen*cantidad)/capacidad FROM almacenajes INNER JOIN productos ON almacenajes.producto = productos.cod_barras WHERE bodega = :bodega", nativeQuery = true)
+    Collection<Almacenaje> darIndiceOcupacion(@Param("bodega") Integer bodega);
+
+
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM almacenajes WHERE bodega = :bodega AND producto = : producto", nativeQuery = true)

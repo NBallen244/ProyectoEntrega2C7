@@ -31,7 +31,7 @@ public class OrdenController {
     @PostMapping("/ordenes/new/save")
     public ResponseEntity<String> ordenGuardar(@RequestBody Orden norden) {
         try{
-            ordenRepository.insertarOrden(norden.getFechaEstimada(), norden.getProveedor(), norden.getBodegaDestino());
+            ordenRepository.insertarOrden(norden.getFechaEstimada(), norden.getProveedor().getNIT(), norden.getBodegaDestino().getId());
             return new ResponseEntity<>("Orden creada exitosamente", HttpStatus.CREATED);
         }
         catch(Exception e){
@@ -43,7 +43,7 @@ public class OrdenController {
     @GetMapping("/ordenes/{id}/edit/save")
     public ResponseEntity<String> ordenAnularGuardar(@PathVariable("id")Integer id, @RequestBody Orden orden){
         try{
-            ordenRepository.actualizarOrdenAnulada(id, orden.getFechaEstimada(), orden.getFechaLlegada(), orden.getFechaCreacion(), orden.getProveedor(), orden.getBodegaDestino());
+            ordenRepository.actualizarOrdenAnulada(id, orden.getFechaEstimada(), orden.getFechaLlegada(), orden.getFechaCreacion(), orden.getProveedor().getNIT(), orden.getBodegaDestino().getId());
             return new ResponseEntity<>("Orden actualizada exitosamente", HttpStatus.OK);
         }
         catch(Exception e){
