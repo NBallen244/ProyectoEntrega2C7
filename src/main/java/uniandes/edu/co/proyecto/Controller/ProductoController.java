@@ -48,9 +48,9 @@ public class ProductoController {
     }
 
     @GetMapping("/productos/{id}/delete")
-    public ResponseEntity<String> productoEliminar(@PathVariable("id") Long id) {
+    public ResponseEntity<String> productoEliminar(@PathVariable("cod_barras") Integer cod_barras) {
         try{
-            productoRepository.eliminarProducto(id);
+            productoRepository.eliminarProducto(cod_barras);
             return new ResponseEntity<>("Producto eliminado exitosamente", HttpStatus.OK);
         }
         catch(Exception e){
