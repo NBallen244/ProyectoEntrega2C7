@@ -1,11 +1,16 @@
 package uniandes.edu.co.proyecto.modelo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 //import jakarta.persistence.GeneratedValue;
 //import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,111 +18,101 @@ import jakarta.persistence.Table;
 public class Producto {
 
     @Id
-    //@GeneratedValue(strategy=GenerationType.AUTO) 
-    private String codigoDeBarras;
+    @GeneratedValue(strategy=GenerationType.AUTO) 
+    private Integer cod_barras;
 
     private String nombre;
 
-    private Integer costoBodega;
+    private Integer costo_bodega;
 
-    private Integer precioUnitario;
+    private Integer precio_unitario;
 
     private String presentacion;
 
-    private Integer cantidadPresentacion;
+    private Integer cantidad_presentacion;
 
-    private String unidadMedida;
+    private String unidad_medida;
 
-    private String especifEmpacado;
+    private Integer peso;
 
-    private LocalDate fechaExpiracion;
+    private Integer volumen;
+
+    private Date fecha_vencimiento;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria", referencedColumnName = "codigo")
+    private Categoria categoria;
 
     public Producto(){;}
 
-    public Producto(String codigoDeBarras, String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer cantidadPresentacion, String unidadMedida, String especifEmpacado, LocalDate fechaExpiracion){
+    //repo y controller
+
+    public Producto(String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer peso, Integer volumen, String unidadMedida, Integer cantidadPresentacion,  Date fecha_vencimiento, Categoria categoria){
         
-        this.codigoDeBarras = codigoDeBarras;
         this.nombre = nombre;
-        this.costoBodega = costoBodega;
-        this.precioUnitario = precioUnitario;
+        this.costo_bodega = costoBodega;
+        this.precio_unitario = precioUnitario;
         this.presentacion = presentacion;
-        this.cantidadPresentacion = cantidadPresentacion;
-        this.unidadMedida = unidadMedida;
-        this.especifEmpacado = especifEmpacado;
-        this.fechaExpiracion = fechaExpiracion; 
+        this.peso = peso;
+        this.volumen = volumen;
+        this.unidad_medida = unidadMedida;
+        this.cantidad_presentacion = cantidadPresentacion;
+        this.fecha_vencimiento = fecha_vencimiento;
+        this.categoria = categoria;
 
     }
 
-    public String getCodigoBarras() {
-        return codigoDeBarras;
+    //GETTERS
+
+    public Integer getCodigoBarras(){
+        return cod_barras;
     }
 
-    public void setCodigoBarras(String codigoDeBarras) {
-        this.codigoDeBarras = codigoDeBarras;
-    }
-
-    public String getNombre() {
+    public String getNombre(){
         return nombre;
     }
 
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public Integer getCostoBodega(){
+        return costo_bodega;
     }
 
-    public Integer getCostoBodega() {
-        return costoBodega;
+    public Integer getPrecioUnitario(){
+        return precio_unitario;
     }
 
-    public void setCostoBodega(Integer costoBodega){
-        this.costoBodega = costoBodega;
-    }
-
-    public Integer getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(Integer precioUnitario){
-        this.precioUnitario = precioUnitario;
-    }
-
-    public String getPresentacion() {
+    public String getPresentacion(){
         return presentacion;
     }
 
-    public void setPresentacion(String presentacion){
-        this.presentacion = presentacion;
+    public Integer getPeso(){
+        return peso;
     }
 
-    public Integer getCantidadPresentacion() {
-        return costoBodega;
+    public Integer getVolumen(){
+        return volumen;
     }
 
-    public void setCantidadPresentacon(Integer cantidadPresentacion){
-        this.cantidadPresentacion = cantidadPresentacion;
+    public String getUnidadMedida(){
+        return unidad_medida;
     }
 
-    public String getUnidadMedia() {
-        return unidadMedida;
+    public Integer getCantidadPresentacion(){
+        return cantidad_presentacion;
     }
 
-    public void setUnidadMedida(String unidadMedida){
-        this.unidadMedida = unidadMedida;
+    public Date getFechaVencimiento(){
+        return fecha_vencimiento;
     }
 
-    public String getEspecifEmpacado() {
-        return especifEmpacado;
+    public Categoria getCategoria(){
+        return categoria;
     }
 
-    public void setEspecifEmpacado(String especifEmpacado){
-        this.especifEmpacado = especifEmpacado;
+    //SETTERS
+
+    public void setCodigoBarras(Integer cod_barras){
+        this.cod_barras = cod_barras;
     }
 
-    public LocalDate getFechaExpiracion() {
-        return fechaExpiracion;
-    }
-
-    public void setFechaExpiracion(LocalDate feechaExpiracion){
-        this.fechaExpiracion = fechaExpiracion;
-    }
-
+    
 }
