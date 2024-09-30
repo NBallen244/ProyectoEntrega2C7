@@ -31,12 +31,12 @@ public class CiudadController {
 
 
     @PostMapping("/ciudades/new/save")
-    public ResponseEntity<?> bebidaGuardar(@RequestBody Ciudad ciudad) {
+    public ResponseEntity<?> ciudadGuardar(@RequestBody Ciudad ciudad) {
         try {
             ciudadRepository.insertarCiudad(ciudad.getNombre());
             return ResponseEntity.status(HttpStatus.CREATED).body("Ciudad creada exitosamente");
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al crear la bebida", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al crear la ciudad", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
