@@ -18,7 +18,7 @@ public class Orden {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
-    private Integer id;
+    private Long id;
 
     private String estado;
 
@@ -50,7 +50,7 @@ public class Orden {
 
     //GETTERS
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -80,7 +80,7 @@ public class Orden {
 
     //SETTERS
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

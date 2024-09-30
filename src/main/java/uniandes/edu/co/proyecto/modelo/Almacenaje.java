@@ -11,16 +11,16 @@ public class Almacenaje {
     @EmbeddedId
     private AlmacenajePK pk;
 
-    private Integer costo_promedio;
+    private Long costo_promedio;
 
-    private Integer capacidad;
-    private Integer cantidad;
+    private Long capacidad;
+    private Long cantidad;
 
-    private Integer nivel_minimo;
+    private Long nivel_minimo;
 
     public Almacenaje(){;}
 
-    public Almacenaje(Integer costoPromedio, Integer capacidadBodega, Integer nivelMinimoReorden, Integer cantidad, Bodega bodega, Producto producto){
+    public Almacenaje(Long costoPromedio, Long capacidadBodega, Long nivelMinimoReorden, Long cantidad, Bodega bodega, Producto producto){
         this.pk=new AlmacenajePK(bodega, producto);
         this.costo_promedio = costoPromedio;
         this.capacidad = capacidadBodega;
@@ -30,35 +30,35 @@ public class Almacenaje {
 
     
 
-    public Integer getCosto_promedio() {
+    public Long getCosto_promedio() {
         return costo_promedio;
     }
 
-    public void setCosto_promedio(Integer costo_promedio) {
+    public void setCosto_promedio(Long costo_promedio) {
         this.costo_promedio = costo_promedio;
     }
 
-    public Integer getCapacidad() {
+    public Long getCapacidad() {
         return capacidad;
     }
 
-    public void setCapacidad(Integer capacidad) {
+    public void setCapacidad(Long capacidad) {
         this.capacidad = capacidad;
     }
 
-    public Integer getCantidad() {
+    public Long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
-    public Integer getNivel_minimo() {
+    public Long getNivel_minimo() {
         return nivel_minimo;
     }
 
-    public void setNivel_minimo(Integer nivel_minimo) {
+    public void setNivel_minimo(Long nivel_minimo) {
         this.nivel_minimo = nivel_minimo;
     }
 

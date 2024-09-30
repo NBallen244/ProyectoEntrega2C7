@@ -37,7 +37,7 @@ public class ProductoController {
     }
 
     @GetMapping("/productos/{cod_barras}/edit/save")
-    public ResponseEntity<String> ordenEditarGuardar(@PathVariable("cod_barras")Integer cod_barras, @RequestBody Producto producto){
+    public ResponseEntity<String> ordenEditarGuardar(@PathVariable("cod_barras")Long cod_barras, @RequestBody Producto producto){
         try{
             productoRepository.actualizarProducto(cod_barras, producto.getNombre(), producto.getCostoBodega(), producto.getPrecioUnitario(), producto.getPresentacion(), producto.getPeso(),  producto.getVolumen(), producto.getUnidadMedida(), producto.getCantidadPresentacion(),  producto.getFechaVencimiento(), producto.getCategoria().getCodigo());
             return new ResponseEntity<>("Producto actualizado exitosamente", HttpStatus.OK);
@@ -48,7 +48,7 @@ public class ProductoController {
     }
 
     @GetMapping("/productos/{cod_barras}/delete")
-    public ResponseEntity<String> productoEliminar(@PathVariable("cod_barras") Integer cod_barras) {
+    public ResponseEntity<String> productoEliminar(@PathVariable("cod_barras") Long cod_barras) {
         try{
             productoRepository.eliminarProducto(cod_barras);
             return new ResponseEntity<>("Producto eliminado exitosamente", HttpStatus.OK);

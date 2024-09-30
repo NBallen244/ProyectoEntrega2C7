@@ -12,7 +12,7 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
-    private Integer codigo;
+    private Long codigo;
 
     private String nombre;
 
@@ -30,11 +30,11 @@ public class Categoria {
 
     }
 
-    public Integer getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setcodigo(Integer codigo) {
+    public void setcodigo(Long codigo) {
         this.codigo = codigo;
     }
 

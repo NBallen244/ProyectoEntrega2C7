@@ -11,19 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import uniandes.edu.co.proyecto.modelo.Ciudad;
 
-public interface CiudadRepository extends JpaRepository<Ciudad, Integer>{
+public interface CiudadRepository extends JpaRepository<Ciudad, Long>{
     @Query(value = "SELECT * FROM ciudades", nativeQuery = true)
     Collection<Ciudad> darCiudades();
 
     
     @Query(value = "SELECT * FROM ciudades WHERE id = :id", nativeQuery = true)
-    Ciudad darCiudad(@Param("id") Integer id);
+    Ciudad darCiudad(@Param("id") Long id);
 
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM ciudades WHERE id = : id", nativeQuery = true)
-    void eliminarCiudad(@Param("id") Integer id);
+    void eliminarCiudad(@Param("id") Long id);
 
 
     @Modifying

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import uniandes.edu.co.proyecto.modelo.Producto;
 
 
-public interface ProductoRepository extends JpaRepository <Producto, Integer>{
+public interface ProductoRepository extends JpaRepository <Producto, Long>{
 
     @Query(value = "SELECT * FROM productos", nativeQuery=true )
     Collection<Producto> darProductos();
@@ -24,19 +24,19 @@ public interface ProductoRepository extends JpaRepository <Producto, Integer>{
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO productos (cod_barras, nombre, costo_bodega, precio_unitario, presentacion, peso,  volumen, unidad_medida, cantidad_presentacion,  fecha_vencimiento, categoria) VALUES(paso.nextval, :nombre, :costo_bodega, :precio_unitario, :presentacion, :peso,  :volumen, :unidad_medida, :cantidad_presentacion,  :fecha_vencimiento, :categoria)",  nativeQuery = true)
-    void insertarProducto(@Param("nombre") String nombre, @Param("costo_bodega") Integer costo_bodega, @Param("precio_unitario") Integer precio_unitario, 
-    @Param("presentacion") String presentacion, @Param("peso") Integer peso, @Param("volumen") Integer volumen, @Param("unidad_medida") String unidad_medida, 
-    @Param("cantidad_presentacion") Integer cantidad_presentacion, @Param("fecha_vencimiento") Date fecha_vencimiento, @Param("categoria") Integer categoria);
+    void insertarProducto(@Param("nombre") String nombre, @Param("costo_bodega") Long costo_bodega, @Param("precio_unitario") Long precio_unitario, 
+    @Param("presentacion") String presentacion, @Param("peso") Long peso, @Param("volumen") Long volumen, @Param("unidad_medida") String unidad_medida, 
+    @Param("cantidad_presentacion") Long cantidad_presentacion, @Param("fecha_vencimiento") Date fecha_vencimiento, @Param("categoria") Long categoria);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE productos SET nombre=:nombre, costo_bodega=:costo_bodega, precio_unitario=:precio_unitario, presentacion=:presentacion, peso=:peso,  volumen=:volumen, unidad_medida=:unidad_medida, cantidad_presentacion=:cantidad_presentacion,  fecha_vencimiento=:fecha_vencimiento, categoria=:categoria WHERE cod_barras = :cod_barras", nativeQuery = true)
-    void actualizarProducto(@Param("cod_barras") Integer cod_barras, @Param("nombre") String nombre, @Param("costo_bodega") Integer costo_bodega, @Param("precio_unitario") Integer precio_unitario, 
-    @Param("presentacion") String presentacion, @Param("peso") Integer peso, @Param("volumen") Integer volumen, @Param("unidad_medida") String unidad_medida, 
-    @Param("cantidad_presentacion") Integer cantidad_presentacion, @Param("fecha_vencimiento") Date fecha_vencimiento, @Param("categoria") Integer categoria);
+    void actualizarProducto(@Param("cod_barras") Long cod_barras, @Param("nombre") String nombre, @Param("costo_bodega") Long costo_bodega, @Param("precio_unitario") Long precio_unitario, 
+    @Param("presentacion") String presentacion, @Param("peso") Long peso, @Param("volumen") Long volumen, @Param("unidad_medida") String unidad_medida, 
+    @Param("cantidad_presentacion") Long cantidad_presentacion, @Param("fecha_vencimiento") Date fecha_vencimiento, @Param("categoria") Long categoria);
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM productos WHERE cod_barras = :cod_barras", nativeQuery = true)
-    void eliminarProducto(@Param("cod_barras") Integer cod_barras);
+    void eliminarProducto(@Param("cod_barras") Long cod_barras);
 }

@@ -17,23 +17,23 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
-    private Integer cod_barras;
+    private Long cod_barras;
 
     private String nombre;
 
-    private Integer costo_bodega;
+    private Long costo_bodega;
 
-    private Integer precio_unitario;
+    private Long precio_unitario;
 
     private String presentacion;
 
-    private Integer cantidad_presentacion;
+    private Long cantidad_presentacion;
 
     private String unidad_medida;
 
-    private Integer peso;
+    private Long peso;
 
-    private Integer volumen;
+    private Long volumen;
 
     private Date fecha_vencimiento;
 
@@ -43,7 +43,7 @@ public class Producto {
 
     public Producto(){;}
 
-    public Producto(Integer cod_barras, String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer cantidadPresentacion, String unidadMedida, Integer peso, Integer volumen, Date fecha_vencimiento, Categoria categoria){
+    public Producto(Long cod_barras, String nombre, Long costoBodega, Long precioUnitario, String presentacion, Long cantidadPresentacion, String unidadMedida, Long peso, Long volumen, Date fecha_vencimiento, Categoria categoria){
         
         this.cod_barras = cod_barras;
         this.nombre = nombre;
@@ -61,7 +61,7 @@ public class Producto {
 
     //GETTERS
 
-    public Integer getCodigoBarras(){
+    public Long getCodigoBarras(){
         return cod_barras;
     }
 
@@ -69,11 +69,11 @@ public class Producto {
         return nombre;
     }
 
-    public Integer getCostoBodega(){
+    public Long getCostoBodega(){
         return costo_bodega;
     }
 
-    public Integer getPrecioUnitario(){
+    public Long getPrecioUnitario(){
         return precio_unitario;
     }
 
@@ -81,11 +81,11 @@ public class Producto {
         return presentacion;
     }
 
-    public Integer getPeso(){
+    public Long getPeso(){
         return peso;
     }
 
-    public Integer getVolumen(){
+    public Long getVolumen(){
         return volumen;
     }
 
@@ -93,7 +93,7 @@ public class Producto {
         return unidad_medida;
     }
 
-    public Integer getCantidadPresentacion(){
+    public Long getCantidadPresentacion(){
         return cantidad_presentacion;
     }
 
@@ -107,7 +107,7 @@ public class Producto {
 
     //SETTERS
 
-    public void setCodigoBarras(Integer cod_barras){
+    public void setCodigoBarras(Long cod_barras){
         this.cod_barras = cod_barras;
     }
 
@@ -115,11 +115,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public void setCostoBodega(Integer costo_bodega){
+    public void setCostoBodega(Long costo_bodega){
         this.costo_bodega = costo_bodega;
     }
 
-    public void setPrecioUnitario(Integer precio_unitario){
+    public void setPrecioUnitario(Long precio_unitario){
         this.precio_unitario = precio_unitario;
     }
 
@@ -127,11 +127,11 @@ public class Producto {
         this.presentacion = presentacion;
     }
 
-    public void setPeso(Integer peso){
+    public void setPeso(Long peso){
         this.peso = peso;
     }
 
-    public void setVolumen(Integer volumen){
+    public void setVolumen(Long volumen){
         this.volumen = volumen;
     }
 
@@ -139,7 +139,7 @@ public class Producto {
         this.unidad_medida = unidad_medida;
     }
 
-    public void setCantidadPresentacion(Integer cantidad_presentacion){
+    public void setCantidadPresentacion(Long cantidad_presentacion){
         this.cantidad_presentacion = cantidad_presentacion;
     }
 

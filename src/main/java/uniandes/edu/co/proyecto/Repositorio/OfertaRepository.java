@@ -25,7 +25,7 @@ public interface OfertaRepository extends JpaRepository <Oferta, OfertaPK>{
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO ofertas (proveedor, producto) VALUES( :proveedor, :producto)", nativeQuery = true)
-    void insertarOferta(@Param("proveedor")Integer proveedor, @Param("producto")Integer producto);
+    void insertarOferta(@Param("proveedor")Long proveedor, @Param("producto")Long producto);
 
 
     @Modifying

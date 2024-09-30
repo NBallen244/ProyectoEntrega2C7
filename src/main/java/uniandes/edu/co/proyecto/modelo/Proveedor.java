@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 public class Proveedor {
 
     @Id
-    private Integer nit;
+    private Long nit;
 
     private String nombre;
 
@@ -17,11 +17,11 @@ public class Proveedor {
 
     private String contacto;
 
-    private Integer telefono;
+    private Long telefono;
 
     public Proveedor(){;}
 
-    public Proveedor(Integer nit, String nombre, String direccion, String contacto, Integer telefono){
+    public Proveedor(Long nit, String nombre, String direccion, String contacto, Long telefono){
         this.nit = nit;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -31,11 +31,11 @@ public class Proveedor {
 
     //TODO: GETTERS Y SETTERS
 
-    public Integer getNIT() {
+    public Long getNIT() {
         return nit;
     }
 
-    public void setNIT(Integer nit) {
+    public void setNIT(Long nit) {
         this.nit = nit;
     }
 
@@ -63,11 +63,11 @@ public class Proveedor {
         this.contacto = contacto;
     }
 
-    public Integer getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 

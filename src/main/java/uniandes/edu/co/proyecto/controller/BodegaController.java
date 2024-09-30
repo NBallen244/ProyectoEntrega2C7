@@ -38,7 +38,7 @@ public class BodegaController {
     }
 
     @GetMapping("/bodegas/{id}/delete")
-    public ResponseEntity<?> bodegaBorrar(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> bodegaBorrar(@PathVariable("id") Long id) {
         try {
             bodegaRepository.eliminarBodega(id);
             return ResponseEntity.ok("Bodega eliminada exitosamente");

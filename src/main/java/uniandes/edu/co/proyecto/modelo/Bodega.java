@@ -14,11 +14,11 @@ public class Bodega {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
-    private Integer id;
+    private Long id;
 
     private String nombre;
 
-    private Integer tamaño;
+    private Long tamaño;
 
     @ManyToOne
     @JoinColumn(name = "sucursal", referencedColumnName = "id")
@@ -26,7 +26,7 @@ public class Bodega {
 
     public Bodega(){;}
 
-    public Bodega(String nombre, Integer tamaño, Sucursal sucursal){
+    public Bodega(String nombre, Long tamaño, Sucursal sucursal){
 
         this.tamaño = tamaño;
         this.nombre = nombre;
@@ -34,7 +34,7 @@ public class Bodega {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -46,7 +46,7 @@ public class Bodega {
         this.sucursal = sucursal;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,11 +58,11 @@ public class Bodega {
         this.nombre = nombre;
     }
 
-    public Integer getTamaño(){
+    public Long getTamaño(){
         return tamaño;
     }
 
-    public void setTamaño(Integer tamaño){
+    public void setTamaño(Long tamaño){
         this.tamaño = tamaño;
     }
 

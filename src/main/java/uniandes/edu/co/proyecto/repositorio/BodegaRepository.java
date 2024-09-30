@@ -11,33 +11,33 @@ import org.springframework.transaction.annotation.Transactional;
 
 import uniandes.edu.co.proyecto.modelo.Bodega;
 
-public interface BodegaRepository extends JpaRepository<Bodega, Integer>{
+public interface BodegaRepository extends JpaRepository<Bodega, Long>{
     @Query(value = "SELECT * FROM bodegas", nativeQuery = true)
     Collection<Bodega> darBodegas();
 
     
     @Query(value = "SELECT * FROM bodegas WHERE id = :id", nativeQuery = true)
-    Bodega darBodega(@Param("id") Integer id);
+    Bodega darBodega(@Param("id") Long id);
 
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM bodegas WHERE id = : id", nativeQuery = true)
-    void eliminarBodega(@Param("id") Integer id);
+    void eliminarBodega(@Param("id") Long id);
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM bodegas WHERE sucursal = :sucursal", nativeQuery = true)
-    void eliminarBodegaPorSucursal(@Param("sucursal") Integer sucursal);
+    void eliminarBodegaPorSucursal(@Param("sucursal") Long sucursal);
 
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE bodegas SET nombre = :nombre, tamaño = :tamaño, sucursal = :sucursal WHERE id = :id", nativeQuery = true)
-    void actualizarBodega(@Param("nombre") String nombre, @Param("tamaño") Integer tamaño, @Param("sucursal") Integer sucursal);
+    void actualizarBodega(@Param("nombre") String nombre, @Param("tamaño") Long tamaño, @Param("sucursal") Long sucursal);
 
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO bodegas (id, nombre, tamaño, sucursal) VALUES ( paso.nextval , :nombre, :tamaño, :sucursal)", nativeQuery = true)
-    void insertarBodega(@Param("nombre") String nombre, @Param("tamaño") Integer tamaño, @Param("sucursal") Integer sucursal);
+    void insertarBodega(@Param("nombre") String nombre, @Param("tamaño") Long tamaño, @Param("sucursal") Long sucursal);
 }

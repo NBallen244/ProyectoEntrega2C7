@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import jakarta.transaction.Transactional;
 import uniandes.edu.co.proyecto.modelo.Sucursal;
 
-public interface SucursalRepository extends JpaRepository<Sucursal, Integer> {
+public interface SucursalRepository extends JpaRepository<Sucursal, Long> {
 
     @Query(value = "SELECT * FROM sucursales", nativeQuery = true)
     Collection<Sucursal> darSucursales();
@@ -21,14 +21,14 @@ public interface SucursalRepository extends JpaRepository<Sucursal, Integer> {
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO sucursales (id, nombre, tamaño, ciudad, telefono, direccion) VALUES ( paso.nextval , :nombre, :tamaño, :ciudad, :telefono, :direccion)", nativeQuery = true)
-    void insertarSucursal(@Param("nombre") String nombre, @Param("tamaño") Integer tamaño, @Param("ciudad") Integer ciudad,
-    @Param("telefono") Integer telefono, @Param("direccion") String direccion);
+    void insertarSucursal(@Param("nombre") String nombre, @Param("tamaño") Long tamaño, @Param("ciudad") Long ciudad,
+    @Param("telefono") Long telefono, @Param("direccion") String direccion);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE sucursales SET nombre = :nombre, ciudad = :ciudad, tamaño = :tamaño, telefono = :telefono, direccion = :direccion WHERE id = :id", nativeQuery = true)
-    void actualizarSucursal(@Param("id") long id, @Param("nombre") String nombre, @Param("ciudad") Integer ciudad,
-    @Param("tamaño") Integer tamaño, @Param("telefono") Integer telefono, @Param("direccion") String direccion);
+    void actualizarSucursal(@Param("id") long id, @Param("nombre") String nombre, @Param("ciudad") Long ciudad,
+    @Param("tamaño") Long tamaño, @Param("telefono") Long telefono, @Param("direccion") String direccion);
 
     @Modifying
     @Transactional

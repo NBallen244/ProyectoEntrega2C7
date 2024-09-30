@@ -41,7 +41,7 @@ public class AlmacenajeController {
     }
 
     @PostMapping("/almacenajes/{id}/edit/save")
-    public ResponseEntity<?> almacenajeEditarGuardar(@PathVariable("bodega") Integer bodega, @PathVariable("producto") Integer producto, @RequestBody Almacenaje almacenaje) {
+    public ResponseEntity<?> almacenajeEditarGuardar(@PathVariable("bodega") Long bodega, @PathVariable("producto") Long producto, @RequestBody Almacenaje almacenaje) {
         try {
             almacenajeRepository.actualizarAlmacenaje(almacenaje.getPk().getBodega().getId(), almacenaje.getPk().getProducto().getCodigoBarras(), almacenaje.getCantidad(), almacenaje.getCapacidad(), almacenaje.getCosto_promedio(),almacenaje.getNivel_minimo());
             return ResponseEntity.ok("Almacenaje actualizada exitosamente");
@@ -51,7 +51,7 @@ public class AlmacenajeController {
     }
 
     @GetMapping("/almacenajes/{id}/delete")
-    public ResponseEntity<?> almacenajeBorrar(@PathVariable("bodega") Integer bodega, @PathVariable("producto") Integer producto) {
+    public ResponseEntity<?> almacenajeBorrar(@PathVariable("bodega") Long bodega, @PathVariable("producto") Long producto) {
         try {
             almacenajeRepository.eliminarAlmacenaje(bodega, producto);
             return ResponseEntity.ok("Producto eliminado de la bodega exitosamente");
