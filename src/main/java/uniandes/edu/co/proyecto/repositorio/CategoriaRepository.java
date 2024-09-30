@@ -19,6 +19,9 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
     @Query(value = "SELECT * FROM categorias WHERE codigo = :codigo", nativeQuery = true)
     Categoria darCategoria(@Param("codigo") Integer codigo);
 
+    @Query(value = "SELECT * FROM categorias WHERE nombre = :nombre", nativeQuery = true)
+    Collection<Categoria> darCategoriasPorNombre(@Param("nombre") String nombre);
+
 
     @Modifying
     @Transactional
@@ -33,6 +36,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO categorias (nombre, descripcion, sucursalo) VALUES ( proyecto_sequence.nextval , :nombre, :descripcion, :sucursal)", nativeQuery = true)
+    @Query(value = "INSERT INTO categorias (codigo, nombre, descripcion, sucursalo) VALUES ( proyecto_sequence.nextval , :nombre, :descripcion, :sucursal)", nativeQuery = true)
     void insertarCategoria(@Param("nombre") String nombre, @Param("descripcion") String descripcion, @Param("caracteristicas") String caracteristicas);
 }

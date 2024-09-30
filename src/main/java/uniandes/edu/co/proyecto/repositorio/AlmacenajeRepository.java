@@ -49,7 +49,7 @@ public interface AlmacenajeRepository extends JpaRepository<Almacenaje, Almacena
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO almacenajes (bodega, producto, capacidad, cantidad, costo_promedio, nivel_minimo) VALUES ( proyecto_sequence.nextval , :bodega, :producto, :capacidad, :cantidad, :costo_promedio, :nivel_minimo)", nativeQuery = true)
+    @Query(value = "INSERT INTO almacenajes (bodega, producto, capacidad, cantidad, costo_promedio, nivel_minimo) VALUES ( :bodega, :producto, :capacidad, :cantidad, :costo_promedio, :nivel_minimo)", nativeQuery = true)
     void insertarAlmacenaje(@Param("bodega") Integer bodega, @Param("producto") Integer producto, @Param("capacidad") Integer capacidad,
         @Param("cantidad") Integer cantidad, @Param("costo_promedio") Integer costo_promedio,
         @Param("nivel_minimo") Integer nivel_minimo);

@@ -52,13 +52,4 @@ public class ProveedoresController {
         }
     }
 
-    @GetMapping("/proveedores/{id}/delete")
-    public ResponseEntity<String> proveedorEliminar(@PathVariable("nit") Integer nit) {
-        try {
-            proveedorRepository.eliminarProveedor(nit);
-            return new ResponseEntity<>("Proveedor eliminado exitosamente", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar al proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

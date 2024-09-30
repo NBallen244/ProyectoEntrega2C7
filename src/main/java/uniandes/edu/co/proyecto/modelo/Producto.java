@@ -14,7 +14,7 @@ public class Producto {
 
     @Id
     //@GeneratedValue(strategy=GenerationType.AUTO) 
-    private String codigoDeBarras;
+    private Integer cod_barras;
 
     private String nombre;
 
@@ -34,9 +34,9 @@ public class Producto {
 
     public Producto(){;}
 
-    public Producto(String codigoDeBarras, String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer cantidadPresentacion, String unidadMedida, String especifEmpacado, LocalDate fechaExpiracion){
+    public Producto(Integer cod_barras, String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer cantidadPresentacion, String unidadMedida, String especifEmpacado, LocalDate fechaExpiracion){
         
-        this.codigoDeBarras = codigoDeBarras;
+        this.cod_barras = cod_barras;
         this.nombre = nombre;
         this.costoBodega = costoBodega;
         this.precioUnitario = precioUnitario;
@@ -48,12 +48,12 @@ public class Producto {
 
     }
 
-    public String getCodigoBarras() {
-        return codigoDeBarras;
+    public Integer getCodigoBarras() {
+        return cod_barras;
     }
 
-    public void setCodigoBarras(String codigoDeBarras) {
-        this.codigoDeBarras = codigoDeBarras;
+    public void setCodigoBarras(Integer cod_barras) {
+        this.cod_barras = cod_barras;
     }
 
     public String getNombre() {

@@ -41,23 +41,4 @@ public class SucursalesController {
         }
     }
 
-    @PostMapping("/sucursales/{id}/edit/save")
-    public ResponseEntity<String> sucursalEditarGuardar(@PathVariable("id") long id, @RequestBody Sucursal sucursal) {
-        try {
-            sucursalRepository.actualizarSucursal(id, sucursal.getNombre(), sucursal.getCiudad(), sucursal.getTamaño(), sucursal.getTelefono(), sucursal.getDireccion());
-            return new ResponseEntity<>("Sucursal actualizada exitosamente", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al actualizar la sucursal", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/sucursales/{id}/delete")
-    public ResponseEntity<String> sucursalEliminar(@PathVariable("id") long id) {
-        try {
-            sucursalRepository.eliminarSucursal(id);
-            return new ResponseEntity<>("Sucursal eliminada exitosamente", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar la sucursal", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }
