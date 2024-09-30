@@ -18,11 +18,7 @@ import jakarta.persistence.Table;
 public class Producto {
 
     @Id
-<<<<<<< HEAD
-    //@GeneratedValue(strategy=GenerationType.AUTO) 
-=======
     @GeneratedValue(strategy=GenerationType.AUTO) 
->>>>>>> 7c3745da8f668361933a86c301ade972431b2e48
     private Integer cod_barras;
 
     private String nombre;
@@ -49,14 +45,9 @@ public class Producto {
 
     public Producto(){;}
 
-<<<<<<< HEAD
-    public Producto(Integer cod_barras, String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer cantidadPresentacion, String unidadMedida, String especifEmpacado, LocalDate fechaExpiracion){
+    public Producto(Integer cod_barras, String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer cantidadPresentacion, String unidadMedida, Integer peso, Integer volumen, Date fecha_vencimiento, Categoria categoria){
         
         this.cod_barras = cod_barras;
-=======
-    public Producto(String nombre, Integer costoBodega, Integer precioUnitario, String presentacion, Integer peso, Integer volumen, String unidadMedida, Integer cantidadPresentacion,  Date fecha_vencimiento, Categoria categoria){
-        
->>>>>>> 7c3745da8f668361933a86c301ade972431b2e48
         this.nombre = nombre;
         this.costo_bodega = costoBodega;
         this.precio_unitario = precioUnitario;
@@ -70,17 +61,6 @@ public class Producto {
 
     }
 
-<<<<<<< HEAD
-    public Integer getCodigoBarras() {
-        return cod_barras;
-    }
-
-    public void setCodigoBarras(Integer cod_barras) {
-        this.cod_barras = cod_barras;
-    }
-
-    public String getNombre() {
-=======
     //GETTERS
 
     public Integer getCodigoBarras(){
@@ -88,7 +68,6 @@ public class Producto {
     }
 
     public String getNombre(){
->>>>>>> 7c3745da8f668361933a86c301ade972431b2e48
         return nombre;
     }
 
