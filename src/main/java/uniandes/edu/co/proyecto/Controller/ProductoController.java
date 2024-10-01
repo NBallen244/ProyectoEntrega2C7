@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uniandes.edu.co.proyecto.modelo.Categoria;
 import uniandes.edu.co.proyecto.modelo.Producto;
 import uniandes.edu.co.proyecto.repositorio.ProductoRepository;
+import uniandes.edu.co.proyecto.repositorio.ProductoRepository.RespuestaInsuficiente;
 
 @RestController
 public class ProductoController {
@@ -47,8 +48,8 @@ public class ProductoController {
         return ResponseEntity.ok(response);
     }
 
-     @GetMapping("/productos/{codigo}")
-    public ResponseEntity<Producto> categorias(@PathVariable("codigo")int codigo) {
+    @GetMapping("/productos/{codigo}")
+    public ResponseEntity<Producto> getProducto(@PathVariable("codigo")int codigo) {
         try {
             Producto producto = productoRepository.darProducto(codigo);
             return ResponseEntity.ok(producto);
@@ -56,8 +57,18 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    /*RFC5 */
+    @GetMapping("/productos/insuficientes")
+    public ResponseEntity<Collection<RespuestaInsuficiente>> getProductosInsuficientes() {
+        try {
+            Collection<RespuestaInsuficiente> productos = productoRepository.darProductoInsuficiente();
+            return ResponseEntity.ok(productos);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     @GetMapping("/productos/consulta")
-    public ResponseEntity<Collection<Producto>> categorias(@RequestParam(required=true)String nombre) {
+    public ResponseEntity<Collection<Producto>> getProductosNombre(@RequestParam(required=true)String nombre) {
         try {
             Collection<Producto> producto = productoRepository.darProductoPorNombre(nombre);
             return ResponseEntity.ok(producto);

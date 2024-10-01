@@ -44,6 +44,18 @@ public interface ProductoRepository extends JpaRepository <Producto, Long>{
     @Query(value = "SELECT * FROM productos INNER JOIN categorias ON productos.categoria=categorias.codigo WHERE categorias.codigo = :categoria", nativeQuery=true)
     Collection<Producto> darProductoCategoria(@Param("categoria") Long categoria);
 
+    /*RFC5 */
+
+    public interface RespuestaInsuficiente{
+        Long getId();
+        String getNombre();
+        Long getBodega();
+        Long getProveedor();
+        Long getSucursal();
+        int getCantidad();
+    }
+    @Query(value = "SELECT productos.id id, productos.nombre nombre, almacenaje.bodega bodega, oferta.proveedor proveedor, bodega.sucursal sucursal, almacenaje.cantidad cantidad FROM productos INNER JOIN almacenajes ON productos.cod_barras=almacenajes.producto INNER JOIN bodegas ON bodegas.id = almacenajes.bodega INNER JOIN ofertas ON producto.cod_barras=oferta.producto WHERE almacenajes.cantidad<almacenajes.nivel_minimo", nativeQuery=true)
+    Collection<RespuestaInsuficiente> darProductoInsuficiente();
 
     @Modifying
     @Transactional

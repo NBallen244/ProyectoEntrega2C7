@@ -62,6 +62,7 @@ public class BodegaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    
 
     @PostMapping("/bodegas/new/save")
     public ResponseEntity<?> bodegaGuardar(@RequestBody Bodega bodega) {
