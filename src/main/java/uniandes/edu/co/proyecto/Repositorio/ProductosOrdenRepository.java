@@ -34,6 +34,6 @@ public interface ProductosOrdenRepository extends JpaRepository<ProductosOrden, 
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO productosOrden (orden, producto, cantidad, precio_acordado) VALUES ( :bodega, :producto, :capacidad, :cantidad, :costo_promedio, :nivel_minimo)", nativeQuery = true)
+    @Query(value = "INSERT INTO productosOrden (orden, producto, cantidad, precio_acordado) VALUES ( :orden, :producto, :capacidad, :cantidad, :costo_promedio, :nivel_minimo)", nativeQuery = true)
     void insertarProductosOrden(@Param("orden") Long orden, @Param("producto") Long producto, @Param("cantidad") Long cantidad, @Param("precio_acordado") Long precio_acordado);
 }
