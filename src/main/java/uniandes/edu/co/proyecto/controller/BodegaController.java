@@ -1,6 +1,8 @@
 package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,19 +11,53 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import uniandes.edu.co.proyecto.modelo.Almacenaje;
 import uniandes.edu.co.proyecto.modelo.Bodega;
 import uniandes.edu.co.proyecto.repositorio.BodegaRepository;
+import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository;
+import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository.RespuestaIndiceOcupacion;
 
 public class BodegaController {
     @Autowired
     private BodegaRepository bodegaRepository;
+
+    @Autowired
+    private AlmacenajeRepository almacenajeRepository;
 
     @GetMapping("/bodegas")
     public ResponseEntity<Collection<Bodega>> bodegas() {
         try {
             Collection<Bodega> bodegas = bodegaRepository.darBodegas();
             return ResponseEntity.ok(bodegas);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /*RFC1 */
+    @GetMapping("/bodegas/indiceOcupacionPorProducto")
+    public ResponseEntity<?> bodegasIndices(@RequestParam(required=true) Long sucursalgaid) {
+        try {
+            Collection<RespuestaIndiceOcupacion> bodegas = almacenajeRepository.darIndiceOcupacion(sucursalgaid);
+            return ResponseEntity.ok(bodegas);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /*RFC3 */
+    @GetMapping("/bodegas/{id}/inventario")
+    public ResponseEntity<?> bodegaInventario(@PathVariable("id") Long id) {
+        try {
+            Collection<Almacenaje> inventario = bodegaRepository.darInventario(id);
+            Bodega bodega=bodegaRepository.darBodega(id);
+            Map<String, Object> response = new HashMap<>();
+            response.put("bodega", bodega);
+            response.put("inventario", inventario);
+
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

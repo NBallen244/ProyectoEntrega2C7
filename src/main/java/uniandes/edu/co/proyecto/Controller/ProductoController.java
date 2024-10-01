@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import uniandes.edu.co.proyecto.modelo.Categoria;
 import uniandes.edu.co.proyecto.modelo.Producto;
 import uniandes.edu.co.proyecto.repositorio.ProductoRepository;
 
@@ -25,7 +27,46 @@ public class ProductoController {
         return productoRepository.darProductos();
     }
 
-     @PostMapping("/productos/new/save")
+    /*RFC2 */
+    @GetMapping("/productos/consulta")
+    public ResponseEntity<Collection<Producto>> getProductosFiltro(@RequestParam(required = false) String filtro, 
+                                                    @RequestParam(required = false) Long sucursal,
+                                                    @RequestParam(required = false) String fecha,
+                                                    @RequestParam(required = false) int precioMin,
+                                                    @RequestParam(required = false) int precioMax,
+                                                    @RequestParam(required = false) Long categoria){
+        Collection<Producto> response;
+        if (filtro.isEmpty()){response=productoRepository.darProductos();}
+        else if (filtro=="sucursal" && sucursal!=null){response=productoRepository.darProductoSucursal(sucursal);}
+        else if (filtro=="fechaMax" && fecha!=null){response=productoRepository.darProductoAnterior(fecha);}
+        else if (filtro=="fechaMin" && fecha!=null){response=productoRepository.darProductoPosterior(fecha);}
+        else if (filtro=="categoria" && categoria!=null){response=productoRepository.darProductoCategoria(categoria);}
+        else if (filtro=="rangoPrecio"){response=productoRepository.darProductoRangoPrecios(precioMin, precioMax);}
+        else{
+            response=productoRepository.darProductos();}
+        return ResponseEntity.ok(response);
+    }
+
+     @GetMapping("/productos/{codigo}")
+    public ResponseEntity<Producto> categorias(@PathVariable("codigo")int codigo) {
+        try {
+            Producto producto = productoRepository.darProducto(codigo);
+            return ResponseEntity.ok(producto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @GetMapping("/productos/consulta")
+    public ResponseEntity<Collection<Producto>> categorias(@RequestParam(required=true)String nombre) {
+        try {
+            Collection<Producto> producto = productoRepository.darProductoPorNombre(nombre);
+            return ResponseEntity.ok(producto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/productos/new/save")
     public ResponseEntity<String> productoGuardar(@RequestBody Producto producto) {
         try{
             productoRepository.insertarProducto(producto.getNombre(), producto.getCostoBodega(), producto.getPrecioUnitario(), producto.getPresentacion(), producto.getPeso(),  producto.getVolumen(), producto.getUnidadMedida(), producto.getCantidadPresentacion(),  producto.getFechaVencimiento(), producto.getCategoria().getCodigo());

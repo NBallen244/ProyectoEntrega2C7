@@ -12,7 +12,14 @@ public class ProductosOrden {
 
     private Long cantidad;
     private Long precio_acordado;
+
+    public ProductosOrden(){;}
     
+    public ProductosOrden(ProductosOrdenPK pk, Long cantidad, Long precio_acordado) {
+        this.pk = pk;
+        this.cantidad = cantidad;
+        this.precio_acordado = precio_acordado;
+    }
     public ProductosOrdenPK getPk() {
         return pk;
     }

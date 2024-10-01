@@ -25,10 +25,15 @@ public interface AlmacenajeRepository extends JpaRepository<Almacenaje, Almacena
     @Query(value = "SELECT * FROM almacenajes WHERE producto = :producto", nativeQuery = true)
     Collection<Almacenaje> darAlmacenajesPorProducto(@Param("producto") Long producto);
 
+    public interface RespuestaIndiceOcupacion{
+        Long getB();
+        Long getP();
+        double getIndice_Ocupacion();
 
+    }
     /*RFC1 */
-    @Query(value = "SELECT almacenajes.bodega, productos.volumen*almacenajes.cantidad/almacenajes.capacidad FROM almacenajes INNER JOIN productos ON almacenajes.producto = productos.cod_barras WHERE bodega = :bodega", nativeQuery = true)
-    Collection<Almacenaje> darIndiceOcupacion(@Param("bodega") Long bodega);
+    @Query(value = "SELECT almacenajes.bodega b, almacenajes.producto p, productos.volumen*almacenajes.cantidad/almacenajes.capacidad indice_ocupacion FROM almacenajes INNER JOIN productos ON almacenajes.producto = productos.cod_barras INNER JOIN bodegas on almacenajes.bodega = bodegas.id WHERE bodegas.sucursal = :sucursal", nativeQuery = true)
+    Collection<RespuestaIndiceOcupacion> darIndiceOcupacion(@Param("sucursal") Long sucursal);
 
 
 
