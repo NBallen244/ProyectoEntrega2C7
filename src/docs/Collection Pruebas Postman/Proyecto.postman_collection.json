@@ -1,0 +1,824 @@
+{
+	"info": {
+		"_postman_id": "8a354366-3243-4804-a976-569fe2770d2c",
+		"name": "Proyecto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38534444"
+	},
+	"item": [
+		{
+			"name": "Bodega",
+			"item": [
+				{
+					"name": "Crear una bodega",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Bodega1\",\r\n    \"tamaño\":30,\r\n    \"sucursal\":{\"id\":1} \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/bodegas/new/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bodegas",
+								"new",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar una bodega",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"   pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bodegas/1/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bodegas",
+								"1",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ciudad",
+			"item": [
+				{
+					"name": "Crear una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Bogotá\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ciudades/new/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ciudades",
+								"new",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sucursal",
+			"item": [
+				{
+					"name": "Crear una sucursal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"sucursal1\",\r\n    \"tamaño\": 29,\r\n    \"direccion\":\"Calle 127\",\r\n    \"telefono\": 123,\r\n    \"ciudad\": {\"id\": 1}\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sucursales/new/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sucursales",
+								"new",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "Crear una categoria",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Congelados\",\r\n    \"descripcion\":\"Productos congelados\",\r\n    \"caracteristicas\": \"Se deben mantener congelados\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categorias/new/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"new",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leer una categoria por codigo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categorias/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leer una categoria por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/categorias/consulta?nombre=Daltfresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"categorias",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Daltfresh"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Proveedor",
+			"item": [
+				{
+					"name": "Crear un proveedor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nit\": 123456,\r\n    \"nombre\":\"Bimbo\",\r\n    \"direccion\":\"Calle 134\",\r\n    \"contacto\":\"Sandra\",\r\n    \"telefono\":555\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/proveedores/new/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proveedores",
+								"new",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un proveedor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nit\": 123456,\r\n    \"nombre\":\"Bimbo2\",\r\n    \"direccion\":\"Calle 144\",\r\n    \"contacto\":\"juan\",\r\n    \"telefono\":736\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/proveedores/123456/edit/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"proveedores",
+								"123456",
+								"edit",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "Crear un producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Shampoo\",\r\n    \"costo_bodega\": 100,\r\n    \"precio_unitario\": 5,\r\n    \"presentacion\":\"Botella de 100ml\",\r\n    \"cantidad_presentacion\":100,\r\n    \"unidad_medida\":\"ml\",\r\n    \"peso\":100,\r\n    \"volumen\":20,\r\n    \"fecha_vencimiento\":\"2025-10-11\",\r\n    \"categoria\":{\"id\":1}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/productos/new/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"productos",
+								"new",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leer producto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Pasta\",\r\n    \"costo_bodega\": 100,\r\n    \"precio_unitario\": 5,\r\n    \"presentacion\":\"paquete de 14gr\",\r\n    \"cantidad_presentacion\":14,\r\n    \"unidad_medida\":\"gr\",\r\n    \"peso\":100,\r\n    \"volumen\":20,\r\n    \"fecha_vencimiento\":\"2026-09-11\",\r\n    \"categoria\":{\"id\":1}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos/{{productoId}}/edit/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos",
+								"{{productoId}}",
+								"edit",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orden",
+			"item": [
+				{
+					"name": "Crear una orden de compra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estado\":\"vigente\",\r\n    \"fecha_estimada\": \"2024-12-09\",\r\n    \"fecha_llegada\": \"2024-12-05\",\r\n    \"proveedor\": {\"id\":123456},\r\n    \"bodega_destino\": {\"id\":1}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/ordenes/new/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"ordenes",
+								"new",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar ordenes de compra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/ordenes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"ordenes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar una orden cambiando su estado a anulada",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/ordenes/{{ordenId}}/edit/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"ordenes",
+								"{{ordenId}}",
+								"edit",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requerimientos funcionales de consulta",
+			"item": [
+				{
+					"name": "RFC1 Indice de ocupacion de cada bodega de una sucursal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/bodegas/indiceOcupacionPorProducto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"bodegas",
+								"indiceOcupacionPorProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC2.1 Productos con precio en cierto rango",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos/consulta?menor=12&mayor=30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "menor",
+									"value": "12"
+								},
+								{
+									"key": "mayor",
+									"value": "30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC2.2 Productos con fecha de vencimiento posterior a",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos/consulta?fecha=\"2024-12-03\"",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "fecha",
+									"value": "\"2024-12-03\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC2.3 Productos con fecha de vencimiento anterior a",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos/consulta?fecha=\"2024-12-03\"",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "fecha",
+									"value": "\"2024-12-03\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC2.4 Disponibilidad en x sucursal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos/consulta?Sucursal=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "Sucursal",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC2.5 Productos de cierta categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos/consulta?categoria=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC3 Inventario de productos en una bodega",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/bodegas/1/inventario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"bodegas",
+								"1",
+								"inventario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC4 Sucursales en las que hay disponibilidad de un producto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7sucursales/consulta?producto=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7sucursales",
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "producto",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RFC5 Productos que requieren una orden de compra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/superandesC7/productos/insuficientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"superandesC7",
+								"productos",
+								"insuficientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
