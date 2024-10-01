@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Sucursal;
@@ -24,6 +25,17 @@ public class SucursalesController {
     public ResponseEntity<Collection<Sucursal>> sucursales() {
         try {
             Collection<Sucursal> sucursales = sucursalRepository.darSucursales();
+            return ResponseEntity.ok(sucursales);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /*RFC4 */
+    @GetMapping("/sucursales/consulta")
+    public ResponseEntity<Collection<Sucursal>> sucursales(@RequestParam(required = true) Long disponibilidad) {
+        try {
+            Collection<Sucursal> sucursales = sucursalRepository.darSucursalesConProducto(disponibilidad);
             return ResponseEntity.ok(sucursales);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
