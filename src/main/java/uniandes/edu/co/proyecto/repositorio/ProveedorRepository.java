@@ -7,12 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import uniandes.edu.co.proyecto.modelo.Proveedor;
 
 public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
 
-    // Le falta incluir direccion
     @Query(value = "SELECT * FROM proveedores", nativeQuery = true)
     Collection<Proveedor> darProveedores();
 
