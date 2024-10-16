@@ -17,16 +17,16 @@ public class Proveedor {
 
     private String contacto;
 
-    private Long telefono;
+    private Long tel_contacto;
 
     public Proveedor(){;}
 
-    public Proveedor(Long nit, String nombre, String direccion, String contacto, Long telefono){
+    public Proveedor(Long nit, String nombre, String direccion, String contacto, Long tel_contacto){
         this.nit = nit;
         this.nombre = nombre;
         this.direccion = direccion;
         this.contacto = contacto;
-        this.telefono = telefono;
+        this.tel_contacto = tel_contacto;
     }
 
     //TODO: GETTERS Y SETTERS
@@ -64,11 +64,11 @@ public class Proveedor {
     }
 
     public Long getTelefono() {
-        return telefono;
+        return tel_contacto;
     }
 
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
+    public void setTelefono(Long tel_contacto) {
+        this.tel_contacto = tel_contacto;
     }
 
 }
