@@ -27,7 +27,7 @@ public interface BodegaRepository extends JpaRepository<Bodega, Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM bodegas WHERE id = : id", nativeQuery = true)
+    @Query(value = "DELETE FROM bodegas WHERE id = :id", nativeQuery = true)
     void eliminarBodega(@Param("id") Long id);
 
     @Modifying

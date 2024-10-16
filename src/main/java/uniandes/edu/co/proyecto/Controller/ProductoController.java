@@ -67,7 +67,7 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @GetMapping("/productos/consulta")
+    @GetMapping("/productos/consultaNombre")
     public ResponseEntity<Collection<Producto>> getProductosNombre(@RequestParam(required=true)String nombre) {
         try {
             Collection<Producto> producto = productoRepository.darProductoPorNombre(nombre);
