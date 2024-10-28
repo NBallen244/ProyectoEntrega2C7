@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Almacenaje;
 import uniandes.edu.co.proyecto.modelo.Bodega;
+import uniandes.edu.co.proyecto.modelo.Orden;
 import uniandes.edu.co.proyecto.repositorio.BodegaRepository;
+import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository;
 import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository.RespuestaIndiceOcupacion;
 
@@ -27,6 +29,9 @@ public class BodegaController {
 
     @Autowired
     private AlmacenajeRepository almacenajeRepository;
+
+    @Autowired
+    private OrdenRepository ordenRepository;
 
     @GetMapping("/bodegas")
     public ResponseEntity<Collection<Bodega>> bodegas() {
@@ -79,8 +84,12 @@ public class BodegaController {
     @GetMapping("/bodegas/{id}/delete")
     public ResponseEntity<?> bodegaBorrar(@PathVariable("id") Long id) {
         try {
-            bodegaRepository.eliminarBodega(id);
-            return ResponseEntity.ok("Bodega eliminada exitosamente");
+            Collection<Orden> ordenesBodega=ordenRepository.darOrdenesXbodegaVigentes(id);
+            if (ordenesBodega.size()==0){bodegaRepository.eliminarBodega(id);
+            return ResponseEntity.ok("Bodega eliminada exitosamente");}
+            else{return new ResponseEntity<>("No se puede eliminar la bodega-ordenes de compra pendientes", HttpStatus.INTERNAL_SERVER_ERROR);}
+            
+            
         } catch (Exception e) {
             return new ResponseEntity<>("Error al eliminar la bodega", HttpStatus.INTERNAL_SERVER_ERROR);
         }

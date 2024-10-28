@@ -1,6 +1,9 @@
 package uniandes.edu.co.proyecto.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,12 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Orden;
+import uniandes.edu.co.proyecto.repositorio.OfertaRepository;
+import uniandes.edu.co.proyecto.repositorio.OfertaRepository.ProductosProveedor;
 import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
+import uniandes.edu.co.proyecto.repositorio.ProductosOrdenRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -23,15 +30,47 @@ public class OrdenController {
     @Autowired
     private OrdenRepository ordenRepository;
 
+    @Autowired
+    private OfertaRepository ofertaRepository;
+
+    @Autowired
+    private ProductosOrdenRepository productosOrdenRepository;
+
     @GetMapping("/ordenes")
     public Collection<Orden> getOrdenes() {
         return ordenRepository.darOrdenes();
     }
 
     @PostMapping("/ordenes/new/save")
-    public ResponseEntity<String> ordenGuardar(@RequestBody Orden norden) {
+    public ResponseEntity<String> ordenGuardar(@RequestBody Orden norden, @RequestParam(required = true) String productos, @RequestParam(required = true) String precios, @RequestParam(required = true) String cantidades) {
         try{
+            long[] id_productos= Arrays.stream(productos.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
+            long[] val_precios= Arrays.stream(precios.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
+            long[] val_cantidades= Arrays.stream(productos.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
+
+            int productosValidos=0;
+            String productos_rechazados=" ";
+            List<Long> id_productosP= new ArrayList<Long>();
+
             ordenRepository.insertarOrden(norden.getFechaEstimada(), norden.getProveedor().getNIT(), norden.getBodegaDestino().getId());
+
+            Collection<ProductosProveedor> productosProveedores = ofertaRepository.darProductosXproveedor(norden.getProveedor().getNIT());
+            for(ProductosProveedor pp: productosProveedores){
+                id_productosP.add(pp.getP());
+            }
+
+            for(int i=0; i<id_productos.length; i++){
+                long idP=id_productos[i];
+                if(id_productosP.contains(idP)){
+                    productosValidos++;
+                    productosOrdenRepository.insertarProductosOrden(ordenRepository.darUltimaOrden().getId(), idP, val_cantidades[i], val_precios[i]);
+                }
+                else{
+                    productos_rechazados+=idP+", ";
+                }
+            }
+
+            
             return new ResponseEntity<>("Orden creada exitosamente", HttpStatus.CREATED);
         }
         catch(Exception e){

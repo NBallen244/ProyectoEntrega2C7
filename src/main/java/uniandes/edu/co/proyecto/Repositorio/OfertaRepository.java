@@ -22,6 +22,13 @@ public interface OfertaRepository extends JpaRepository <Oferta, OfertaPK>{
     @Query(value = "SELECT * FROM ofertas WHERE id= :id", nativeQuery=true)
     Oferta darOferta(@Param("id") int id);
 
+    public interface ProductosProveedor{
+        Long getP();
+    }
+
+    @Query(value = "SELECT ofertas.producto FROM ofertas WHERE ofertas.proveedor = :proveedor", nativeQuery = true)
+    Collection<ProductosProveedor> darProductosXproveedor(@Param("proveedor") Long proveedor);
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO ofertas (proveedor, producto) VALUES( :proveedor, :producto)", nativeQuery = true)

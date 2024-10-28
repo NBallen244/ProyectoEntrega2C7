@@ -17,8 +17,14 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
     @Query(value = "SELECT * FROM ordenes", nativeQuery=true )
     Collection<Orden> darOrdenes();
 
+    @Query(value = "SELECT * FROM ordenes", nativeQuery=true )
+    Orden darUltimaOrden();
+
+    @Query(value = "SELECT * FROM ordenes WHERE bodega_destino = :bodega_destino AND estado = 'vigente'", nativeQuery=true )
+    Collection<Orden> darOrdenesXbodegaVigentes(@Param("bodega_destino") Long bodega);
+
     @Query(value = "SELECT * FROM ordenes WHERE id= :id", nativeQuery=true)
-    Orden darOrden(@Param("id") int id);
+    Orden darOrden(@Param("id") Long id);
 
     @Modifying
     @Transactional
