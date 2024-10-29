@@ -53,7 +53,7 @@ public class OrdenController {
             List<Long> id_productosP= new ArrayList<Long>();
 
             ordenRepository.insertarOrden(norden.getFechaEstimada(), norden.getProveedor().getNIT(), norden.getBodegaDestino().getId());
-
+            Orden creada=ordenRepository.darUltimaOrden();
             Collection<ProductosProveedor> productosProveedores = ofertaRepository.darProductosXproveedor(norden.getProveedor().getNIT());
             for(ProductosProveedor pp: productosProveedores){
                 id_productosP.add(pp.getP());
@@ -63,15 +63,18 @@ public class OrdenController {
                 long idP=id_productos[i];
                 if(id_productosP.contains(idP)){
                     productosValidos++;
-                    productosOrdenRepository.insertarProductosOrden(ordenRepository.darUltimaOrden().getId(), idP, val_cantidades[i], val_precios[i]);
+                    productosOrdenRepository.insertarProductosOrden(creada.getId(), idP, val_cantidades[i], val_precios[i]);
                 }
                 else{
                     productos_rechazados+=idP+", ";
                 }
             }
 
-            
-            return new ResponseEntity<>("Orden creada exitosamente", HttpStatus.CREATED);
+            if (productosValidos==0){
+                ordenRepository.eliminarOrden(creada.getId());
+                return new ResponseEntity<>("Productos no ofrecidos por el proveedor seleccionado", HttpStatus.CREATED);}
+            else{
+                return new ResponseEntity<>("Orden creada. Los siguientes productos no se incluyeron por falta de disponibilidad con el proveedor: "+productos_rechazados, HttpStatus.CREATED);}
         }
         catch(Exception e){
             return new ResponseEntity<>("Error al crear la orden", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -44,8 +44,8 @@ public class BodegaController {
     }
 
     /*RFC1 */
-    @GetMapping("/bodegas/indiceOcupacionPorProducto")
-    public ResponseEntity<?> bodegasIndices(@RequestParam(required=true) Long sucursalgaid) {
+    @GetMapping("/bodegas/indiceOcupacionPorProducto/{sucursal}")
+    public ResponseEntity<?> bodegasIndices(@PathVariable("sucursal") Long sucursalgaid) {
         try {
             Collection<RespuestaIndiceOcupacion> bodegas = almacenajeRepository.darIndiceOcupacion(sucursalgaid);
             return ResponseEntity.ok(bodegas);

@@ -17,7 +17,7 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
     @Query(value = "SELECT * FROM ordenes", nativeQuery=true )
     Collection<Orden> darOrdenes();
 
-    @Query(value = "SELECT * FROM ordenes", nativeQuery=true )
+    @Query(value = "select * from ordenes where ROWNUM = (select max(ROWNUM) from ordenes)", nativeQuery=true )
     Orden darUltimaOrden();
 
     @Query(value = "SELECT * FROM ordenes WHERE bodega_destino = :bodega_destino AND estado = 'vigente'", nativeQuery=true )
