@@ -35,7 +35,7 @@ public class ProveedoresController {
     @PostMapping("/proveedores/new/save")
     public ResponseEntity<String> proveedorGuardar(@RequestBody Proveedor proveedor) {
         try {
-            proveedorRepository.insertarProveedor(proveedor.getNIT(), proveedor.getNombre(), proveedor.getContacto(), proveedor.getTelefono(), proveedor.getDireccion());
+            proveedorRepository.insertarProveedor(proveedor.getNIT(), proveedor.getNombre(), proveedor.getContacto(), proveedor.getTel_contacto(), proveedor.getDireccion());
             return new ResponseEntity<>("Proveedor creado exitosamente", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al crear al proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -45,7 +45,7 @@ public class ProveedoresController {
     @PostMapping("/proveedores/{nit}/edit/save")
     public ResponseEntity<String> proveedorEditarGuardar(@PathVariable("nit") Long nit, @RequestBody Proveedor proveedor) {
         try {
-            proveedorRepository.actualizarProveedor(nit, proveedor.getNombre(), proveedor.getContacto(), proveedor.getTelefono(), proveedor.getDireccion());
+            proveedorRepository.actualizarProveedor(nit, proveedor.getNombre(), proveedor.getContacto(), proveedor.getTel_contacto(), proveedor.getDireccion());
             return new ResponseEntity<>("Proveedor actualizado exitosamente", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al actualizar al proveedor", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -58,15 +58,15 @@ public class Orden {
         return estado;
     }
 
-    public Date getFechaEstimada(){
+    public Date getFecha_estimada(){
         return fecha_estimada;
     }
 
-    public Date getFechaLlegada(){
+    public Date getFecha_llegada(){
         return fecha_llegada;
     }
 
-    public Date getFechaCreacion(){
+    public Date getFecha_creacion(){
         return fecha_creacion;
     }
 
@@ -74,7 +74,7 @@ public class Orden {
         return proveedor;
     }
 
-    public Bodega getBodegaDestino(){
+    public Bodega getBodega_destino(){
         return bodega_destino;
     }
 

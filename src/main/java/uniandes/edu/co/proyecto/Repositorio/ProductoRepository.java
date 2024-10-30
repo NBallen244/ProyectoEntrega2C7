@@ -25,23 +25,23 @@ public interface ProductoRepository extends JpaRepository <Producto, Long>{
     Collection<Producto> darProductoPorNombre(@Param("nombre") String nombre);
 
     /*RFC2.1 Precio en rango*/
-    @Query(value = "SELECT * FROM productos WHERE precio_unitario BETWEEN :menor AND :mayor", nativeQuery=true)
+    @Query(value = "SELECT productos.* FROM productos WHERE precio_unitario BETWEEN :menor AND :mayor", nativeQuery=true)
     Collection<Producto> darProductoRangoPrecios(@Param("menor") int menor, @Param("mayor") int mayor);
 
     /*RFC2.2 Vencimiento posterior a*/
-    @Query(value = "SELECT * FROM productos WHERE fecha_vencimiento > TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery=true)
+    @Query(value = "SELECT productos.* FROM productos WHERE fecha_vencimiento > TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery=true)
     Collection<Producto> darProductoPosterior(@Param("fecha") String fecha);
 
     /*RFC2.3 Vencimiento anterior a*/
-    @Query(value = "SELECT * FROM productos WHERE fecha_vencimiento < TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery=true)
+    @Query(value = "SELECT productos.* FROM productos WHERE fecha_vencimiento < TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery=true)
     Collection<Producto> darProductoAnterior(@Param("fecha") String fecha);
 
     /*RFC2.4 Disponible en x sucursal*/
-    @Query(value = "SELECT * FROM productos INNER JOIN almacenajes ON productos.cod_barras=almacenajes.producto INNER JOIN bodegas ON bodegas.id=almacenajes.bodega WHERE bodegas.sucursal = :sucursal", nativeQuery=true)
+    @Query(value = "SELECT productos.* FROM productos INNER JOIN almacenajes ON productos.cod_barras=almacenajes.producto INNER JOIN bodegas ON bodegas.id=almacenajes.bodega WHERE bodegas.sucursal = :sucursal", nativeQuery=true)
     Collection<Producto> darProductoSucursal(@Param("sucursal") Long sucursal);
 
     /*RFC2.5 Categoria*/
-    @Query(value = "SELECT * FROM productos INNER JOIN categorias ON productos.categoria=categorias.codigo WHERE categorias.codigo = :categoria", nativeQuery=true)
+    @Query(value = "SELECT productos.* FROM productos INNER JOIN categorias ON productos.categoria=categorias.codigo WHERE categorias.codigo = :categoria", nativeQuery=true)
     Collection<Producto> darProductoCategoria(@Param("categoria") Long categoria);
 
     /*RFC5 */

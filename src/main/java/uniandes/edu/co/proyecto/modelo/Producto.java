@@ -61,7 +61,7 @@ public class Producto {
 
     //GETTERS
 
-    public Long getCodigoBarras(){
+    public Long getCod_barras(){
         return cod_barras;
     }
 
@@ -69,11 +69,11 @@ public class Producto {
         return nombre;
     }
 
-    public Long getCostoBodega(){
+    public Long getCosto_bodega(){
         return costo_bodega;
     }
 
-    public Long getPrecioUnitario(){
+    public Long getPrecio_unitario(){
         return precio_unitario;
     }
 
@@ -89,15 +89,15 @@ public class Producto {
         return volumen;
     }
 
-    public String getUnidadMedida(){
+    public String getUnidad_medida(){
         return unidad_medida;
     }
 
-    public Long getCantidadPresentacion(){
+    public Long getCantidad_presentacion(){
         return cantidad_presentacion;
     }
 
-    public Date getFechaVencimiento(){
+    public Date getFecha_vencimiento(){
         return fecha_vencimiento;
     }
 

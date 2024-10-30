@@ -33,9 +33,9 @@ public class SucursalesController {
 
     /*RFC4 */
     @GetMapping("/sucursales/consulta")
-    public ResponseEntity<Collection<Sucursal>> sucursales(@RequestParam(required = true) Long disponibilidad) {
+    public ResponseEntity<Collection<Sucursal>> sucursalesConP(@RequestParam(required = true) Long producto) {
         try {
-            Collection<Sucursal> sucursales = sucursalRepository.darSucursalesConProducto(disponibilidad);
+            Collection<Sucursal> sucursales = sucursalRepository.darSucursalesConProducto(producto);
             return ResponseEntity.ok(sucursales);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

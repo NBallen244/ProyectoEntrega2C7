@@ -17,7 +17,7 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
     @Query(value = "SELECT * FROM ordenes", nativeQuery=true )
     Collection<Orden> darOrdenes();
 
-    @Query(value = "select * from ordenes where ROWNUM = (select max(ROWNUM) from ordenes)", nativeQuery=true )
+    @Query(value = "select * from ordenes where id in (select max(id) from ordenes)", nativeQuery=true )
     Orden darUltimaOrden();
 
     @Query(value = "SELECT * FROM ordenes WHERE bodega_destino = :bodega_destino AND estado = 'vigente'", nativeQuery=true )
@@ -28,8 +28,8 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ordenes (id, estado, fecha_estimada, proveedor, bodega_destino) VALUES(paso.nextval, 'vigente', :fecha_estimada, :proveedor, :bodega_destino)", nativeQuery = true)
-    void insertarOrden(@Param("fecha_estimada")Date fecha_estimada, 
+    @Query(value = "INSERT INTO ordenes (id, estado, fecha_creacion, fecha_estimada, proveedor, bodega_destino) VALUES(paso.nextval, 'vigente', :fecha_creacion, :fecha_estimada, :proveedor, :bodega_destino)", nativeQuery = true)
+    void insertarOrden(@Param("fecha_creacion")Date fecha_creacion, @Param("fecha_estimada")Date fecha_estimada, 
     @Param("proveedor")Long proveedor, @Param("bodega_destino")Long bodega_destino);
 
     @Modifying
@@ -47,7 +47,7 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "DELET FROM ordenes WHERE id = :id", nativeQuery = true)
+    @Query(value = "DELETE FROM ordenes WHERE id = :id", nativeQuery = true)
     void eliminarOrden(@Param("id") Long id);
 }
 

@@ -63,7 +63,7 @@ public class Proveedor {
         this.contacto = contacto;
     }
 
-    public Long getTelefono() {
+    public Long getTel_contacto() {
         return tel_contacto;
     }
 

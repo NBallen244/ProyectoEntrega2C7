@@ -3,6 +3,7 @@ package uniandes.edu.co.proyecto.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +48,12 @@ public class OrdenController {
             long[] id_productos= Arrays.stream(productos.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
             long[] val_precios= Arrays.stream(precios.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
             long[] val_cantidades= Arrays.stream(productos.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
-
+            norden.setFechaCreacion(new Date(new java.util.Date().getTime()));
             int productosValidos=0;
             String productos_rechazados=" ";
             List<Long> id_productosP= new ArrayList<Long>();
 
-            ordenRepository.insertarOrden(norden.getFechaEstimada(), norden.getProveedor().getNIT(), norden.getBodegaDestino().getId());
+            ordenRepository.insertarOrden(norden.getFecha_creacion(), norden.getFecha_estimada(), norden.getProveedor().getNIT(), norden.getBodega_destino().getId());
             Orden creada=ordenRepository.darUltimaOrden();
             Collection<ProductosProveedor> productosProveedores = ofertaRepository.darProductosXproveedor(norden.getProveedor().getNIT());
             for(ProductosProveedor pp: productosProveedores){
@@ -85,7 +86,7 @@ public class OrdenController {
     @GetMapping("/ordenes/{id}/edit/save")
     public ResponseEntity<String> ordenAnularGuardar(@PathVariable("id")Long id, @RequestBody Orden orden){
         try{
-            ordenRepository.actualizarOrdenAnulada(id, orden.getFechaEstimada(), orden.getFechaLlegada(), orden.getFechaCreacion(), orden.getProveedor().getNIT(), orden.getBodegaDestino().getId());
+            ordenRepository.actualizarOrdenAnulada(id, orden.getFecha_estimada(), orden.getFecha_llegada(), orden.getFecha_creacion(), orden.getProveedor().getNIT(), orden.getBodega_destino().getId());
             return new ResponseEntity<>("Orden actualizada exitosamente", HttpStatus.OK);
         }
         catch(Exception e){

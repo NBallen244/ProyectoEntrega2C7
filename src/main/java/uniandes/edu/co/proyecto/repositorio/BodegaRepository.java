@@ -17,8 +17,8 @@ public interface BodegaRepository extends JpaRepository<Bodega, Long>{
     Collection<Bodega> darBodegas();
 
     /*RFC3 */
-    @Query(value = "SELECT * FROM almacenajes WHERE almacenajes.bodega =:bodega", nativeQuery = true)
-    Collection<Almacenaje> darInventario (@Param("bodega") Long bodega);
+    @Query(value = "SELECT * FROM almacenajes WHERE almacenajes.bodega = :id", nativeQuery = true)
+    Collection<Almacenaje> darInventario (@Param("id") Long id);
 
     @Query(value = "SELECT * FROM bodegas WHERE id = :id", nativeQuery = true)
     Bodega darBodega(@Param("id") Long id);
