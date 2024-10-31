@@ -83,11 +83,12 @@ public class BodegaController {
     @GetMapping("/bodegas/{id}/delete")
     public ResponseEntity<?> bodegaBorrar(@PathVariable("id") Long id) {
         try {
-            Collection<Orden> ordenesBodega=ordenRepository.darOrdenesXbodegaVigentes(id);
+            Bodega bodega=bodegaRepository.darBodega(id);
+            Collection<Orden> ordenesPosiblesBodega=ordenRepository.darOrdenesXsucursalVigentes(bodega.getSucursal().getId());
             Collection<Almacenaje> inventario = bodegaRepository.darInventario(id);
-            if (ordenesBodega.size()==0 && inventario.size()==0){bodegaRepository.eliminarBodega(id);
+            if (ordenesPosiblesBodega.size()==0 && inventario.size()==0){bodegaRepository.eliminarBodega(id);
             return ResponseEntity.ok("Bodega eliminada exitosamente");}
-            else{return new ResponseEntity<>("No se puede eliminar la bodega-ordenes de compra pendientes y productos presentes", HttpStatus.INTERNAL_SERVER_ERROR);}
+            else{return new ResponseEntity<>("No se puede eliminar la bodega-sucursal dueña tienes ordenes pendientes por recibir o aún hay inventario en la bodega.", HttpStatus.INTERNAL_SERVER_ERROR);}
             
             
         } catch (Exception e) {

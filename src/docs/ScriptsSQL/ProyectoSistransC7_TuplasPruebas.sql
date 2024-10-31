@@ -20,33 +20,33 @@ insert into ciudades (nombre, id) values ('Alhambra', 4);
 insert into ciudades (nombre, id) values ('Kaom', 5);
 insert into ciudades (nombre, id) values ('Dubravica', 6);
 insert into ciudades (nombre, id) values ('S?r?s', 7);
-insert into ciudades (nombre, id) values ('Puerto López', 8);
+insert into ciudades (nombre, id) values ('Puerto Lï¿½pez', 8);
 insert into ciudades (nombre, id) values ('Semikarakorsk', 9);
 insert into ciudades (nombre, id) values ('Itambacuri', 10);
 
 --base sucursales random
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Onsgard', 1, '8', '957 Michigan Court', 2, '803391057');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Ruskin', 2, '6', '046 Kedzie Hill', 2, '839676064');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Hovde', 3, '77549', '4880 Hoepker Point', 3, '855610553');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Rigney', 4, '4', '837 Johnson Place', 5, '912388172');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Redwing', 5, '19', '6 Lien Junction', 1, '721465833');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Mendota', 6, '98', '3 Oneill Street', 1, '808734931');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Spohn', 7, '23', '224 Lien Point', 10, '614240346');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Shoshone', 8, '19549', '11476 Bluestem Drive', 9, '156879693');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Banding', 9, '21058', '0 Dryden Hill', 9, '392382624');
-insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Shoshone', 10, '2702', '95343 Green Ridge Avenue', 5, '831449879');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Onsgard', 1, '8', '957 Michigan Court', 2, '803391057');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Ruskin', 2, '6', '046 Kedzie Hill', 2, '839676064');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Hovde', 3, '77549', '4880 Hoepker Point', 3, '855610553');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Rigney', 4, '4', '837 Johnson Place', 5, '912388172');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Redwing', 5, '19', '6 Lien Junction', 1, '721465833');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Mendota', 6, '98', '3 Oneill Street', 1, '808734931');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Spohn', 7, '23', '224 Lien Point', 10, '614240346');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Shoshone', 8, '19549', '11476 Bluestem Drive', 9, '156879693');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Banding', 9, '21058', '0 Dryden Hill', 9, '392382624');
+insert into sucursales (nombre, id, tamaï¿½o, direccion, ciudad, telefono) values ('Shoshone', 10, '2702', '95343 Green Ridge Avenue', 5, '831449879');
 
 --base bodegas random
-insert into bodegas (id, tamaño, nombre, sucursal) values (1, '3805', 'Little Purple Monkeyflower', 1);
-insert into bodegas (id, tamaño, nombre, sucursal) values (2, '2', 'Melaspilea Lichen', 2);
-insert into bodegas (id, tamaño, nombre, sucursal) values (3, '198', 'Oregon Checkerbloom', 3);
-insert into bodegas (id, tamaño, nombre, sucursal) values (4, '3', 'Longleaf Groundcherry', 10);
-insert into bodegas (id, tamaño, nombre, sucursal) values (5, '2594', 'Lemmon''s Poppy', 5);
-insert into bodegas (id, tamaño, nombre, sucursal) values (6, '6', 'Fendler''s Drymary', 5);
-insert into bodegas (id, tamaño, nombre, sucursal) values (7, '55', 'Mountain Arnica', 1);
-insert into bodegas (id, tamaño, nombre, sucursal) values (8, '710', 'Star Sedge', 8);
-insert into bodegas (id, tamaño, nombre, sucursal) values (9, '4921', 'Mucronate Sprangletop', 8);
-insert into bodegas (id, tamaño, nombre, sucursal) values (10, '645', 'Small Matweed', 10);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (1, '3805', 'Little Purple Monkeyflower', 1);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (2, '2', 'Melaspilea Lichen', 2);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (3, '198', 'Oregon Checkerbloom', 3);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (4, '3', 'Longleaf Groundcherry', 10);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (5, '2594', 'Lemmon''s Poppy', 5);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (6, '6', 'Fendler''s Drymary', 5);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (7, '55', 'Mountain Arnica', 1);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (8, '710', 'Star Sedge', 8);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (9, '4921', 'Mucronate Sprangletop', 8);
+insert into bodegas (id, tamaï¿½o, nombre, sucursal) values (10, '645', 'Small Matweed', 10);
 
 --categorias
 insert into categorias (codigo, nombre, descripcion, caracteristicas) values (1, 'Ventosanzap', 'CEFTRIAXONE', 'BenQ-Siemens');
@@ -126,17 +126,17 @@ insert into ofertas (proveedor, producto) values ('7', '3');
 
 --ordenes
 
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (1, '4', '2024-05-28', '2024-01-08', '8', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (2, '4', '2024-09-20', '2023-12-11', '7', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (3, '7', '2023-10-27', '2024-05-24', '2', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (4, '2', '2024-02-09', '2024-08-04', '2', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (5, '2', '2024-07-31', '2024-08-06', '3', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (6, '9', '2024-02-29', '2024-07-26', '6', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (7, '4', '2024-04-28', '2024-04-17', '6', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (8, '3', '2024-09-20', '2023-10-22', '6', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (9, '3', '2024-02-16', '2023-12-22', '1', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (10, '1', '2024-09-19', '2023-12-29', '7', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, bodega_destino, estado) values (11, '8', '2024-04-28', '2023-11-27', '9', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (1, '4', '2024-05-28', '2024-01-08', '8', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (2, '4', '2024-09-20', '2023-12-11', '7', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (3, '7', '2023-10-27', '2024-05-24', '2', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (4, '2', '2024-02-09', '2024-08-04', '2', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (5, '2', '2024-07-31', '2024-08-06', '3', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (6, '9', '2024-02-29', '2024-07-26', '6', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (7, '4', '2024-04-28', '2024-04-17', '6', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (8, '3', '2024-09-20', '2023-10-22', '6', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (9, '3', '2024-02-16', '2023-12-22', '1', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (10, '1', '2024-09-19', '2023-12-29', '7', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (11, '8', '2024-04-28', '2023-11-27', '9', 'vigente');
 --productos ordenes
 
 insert into productosOrden (orden, producto, cantidad, precio_acordado) values (1, 9, '410', '108');
@@ -151,3 +151,5 @@ insert into productosorden (orden, producto, cantidad, precio_acordado) values (
 insert into productosorden (orden, producto, cantidad, precio_acordado) values (10, 4, '799', '250');
 insert into productosorden (orden, producto, cantidad, precio_acordado) values (11, 1, '225', '743');
 insert into productosorden (orden, producto, cantidad, precio_acordado) values (10, 5, '680', '141');
+
+commit;

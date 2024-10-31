@@ -23,7 +23,7 @@ create table ciudades (
 create table sucursales (
     id number(5,0),
     nombre varchar(50) not null ,
-    tamaño number(5,0) not null,
+    tamaï¿½o number(5,0) not null,
     ciudad number(5,0) not null,
     telefono number (10,0) not null,
     direccion varchar(50) not null,
@@ -35,7 +35,7 @@ create table sucursales (
 create table bodegas(
     id number(5,0),
     nombre varchar(50) not null ,
-    tamaño number(5,0) not null,
+    tamaï¿½o number(5,0) not null,
     sucursal number(5,0) not null,
     primary key(id),
     foreign key (sucursal) references sucursales(id)
@@ -100,11 +100,10 @@ create table ordenes(
     proveedor number(9,0)not null,
     fecha_estimada date not null,
     estado varchar(25) not null,
-    bodega_destino number(5,0) not null,
-    fecha_llegada date,
+    sucursal_destino number(5,0) not null,
     primary key (id),
     foreign key (proveedor) references proveedores(nit),
-    foreign key (bodega_destino) references bodegas(id)
+    foreign key (sucursal_destino) references sucursales(id)
 );
 alter table ordenes add constraint ck_estado check (estado in ('vigente', 'anulada','entregada'));
 
@@ -117,6 +116,8 @@ create table productosOrden (
     foreign key (orden) references ordenes(id),
     foreign key (producto) references productos(cod_barras)
 );
+
+commit;
 
 
 

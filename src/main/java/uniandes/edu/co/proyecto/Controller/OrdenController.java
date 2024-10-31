@@ -20,6 +20,7 @@ import uniandes.edu.co.proyecto.repositorio.ProductosOrdenRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +43,11 @@ public class OrdenController {
         return ordenRepository.darOrdenes();
     }
 
+    @GetMapping("/ordenes/{id}")
+    public Collection<Orden> getOrdenDetallada(@PathVariable("id")Long id){
+        return ordenRepository.darOrdenes();
+    }
+
     @PostMapping("/ordenes/new/save")
     public ResponseEntity<String> ordenGuardar(@RequestBody Orden norden, @RequestParam(required = true) String productos, @RequestParam(required = true) String precios, @RequestParam(required = true) String cantidades) {
         try{
@@ -53,7 +59,7 @@ public class OrdenController {
             String productos_rechazados=" ";
             List<Long> id_productosP= new ArrayList<Long>();
 
-            ordenRepository.insertarOrden(norden.getFecha_creacion(), norden.getFecha_estimada(), norden.getProveedor().getNIT(), norden.getBodega_destino().getId());
+            ordenRepository.insertarOrden(norden.getFecha_creacion(), norden.getFecha_estimada(), norden.getProveedor().getNIT(), norden.getSucursal_destino().getId());
             Orden creada=ordenRepository.darUltimaOrden();
             Collection<ProductosProveedor> productosProveedores = ofertaRepository.darProductosXproveedor(norden.getProveedor().getNIT());
             for(ProductosProveedor pp: productosProveedores){
@@ -83,14 +89,25 @@ public class OrdenController {
         
     }
     
-    @GetMapping("/ordenes/{id}/edit/save")
-    public ResponseEntity<String> ordenAnularGuardar(@PathVariable("id")Long id, @RequestBody Orden orden){
+    @PutMapping("/ordenes/{id}/edit/anular/save")
+    public ResponseEntity<String> ordenAnularGuardar(@PathVariable("id")Long id){
         try{
-            ordenRepository.actualizarOrdenAnulada(id, orden.getFecha_estimada(), orden.getFecha_llegada(), orden.getFecha_creacion(), orden.getProveedor().getNIT(), orden.getBodega_destino().getId());
+            ordenRepository.actualizarOrdenAnulada(id);
             return new ResponseEntity<>("Orden actualizada exitosamente", HttpStatus.OK);
         }
         catch(Exception e){
-            return new ResponseEntity<>("Error al actualizar la orden", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al actualizar la orden-orden inexistente o entregada", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/ordenes/{id}/edit/entregar/save")
+    public ResponseEntity<String> ordenEntregarGuardar(@PathVariable("id")Long id){
+        try{
+            ordenRepository.actualizarOrdenEntregada(id);
+            return new ResponseEntity<>("Orden actualizada exitosamente", HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>("Error al actualizar la orden-orden inexistente o anulada", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     

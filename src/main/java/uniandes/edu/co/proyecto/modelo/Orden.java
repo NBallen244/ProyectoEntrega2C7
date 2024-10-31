@@ -24,8 +24,6 @@ public class Orden {
 
     private Date fecha_estimada;
 
-    private Date fecha_llegada;
-
     private Date fecha_creacion;
 
     @ManyToOne
@@ -33,18 +31,17 @@ public class Orden {
     private Proveedor proveedor;
 
     @ManyToOne
-    @JoinColumn(name = "bodega_destino", referencedColumnName = "id")
-    private Bodega bodega_destino;
+    @JoinColumn(name = "sucursal_destino", referencedColumnName = "id")
+    private Sucursal sucursal_destino;
 
     public Orden(){;}
 
-    public Orden(Date fecha_estimada, Proveedor proveedor, Bodega bodega_destino){
+    public Orden(Date fecha_estimada, Proveedor proveedor, Sucursal sucursal_destino){
         this.estado = "vigente";
         this.fecha_estimada = fecha_estimada;
-        this.fecha_llegada = null;
         this.fecha_creacion = new Date(new java.util.Date().getTime());
         this.proveedor = proveedor;
-        this.bodega_destino = bodega_destino;
+        this.sucursal_destino = sucursal_destino;
         
     }
 
@@ -62,10 +59,6 @@ public class Orden {
         return fecha_estimada;
     }
 
-    public Date getFecha_llegada(){
-        return fecha_llegada;
-    }
-
     public Date getFecha_creacion(){
         return fecha_creacion;
     }
@@ -74,8 +67,8 @@ public class Orden {
         return proveedor;
     }
 
-    public Bodega getBodega_destino(){
-        return bodega_destino;
+    public Sucursal getSucursal_destino(){
+        return sucursal_destino;
     }
 
     //SETTERS
@@ -92,20 +85,12 @@ public class Orden {
         this.fecha_estimada = fecha_estimada;
     }
 
-    public void setFechaLlegada(Date fecha_llegada){
-        this.fecha_llegada = fecha_llegada;
-    }
-
     public void setFechaCreacion(Date fecha_creacion){
         this.fecha_creacion = fecha_creacion;
     }
 
     public void setProveedor(Proveedor proveedor){
         this.proveedor = proveedor;
-    }
-
-    public void setBodegaDestino(Bodega bodega_destino){
-        this.bodega_destino = bodega_destino;
     }
 
 }

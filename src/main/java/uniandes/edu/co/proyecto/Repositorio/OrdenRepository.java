@@ -20,29 +20,27 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
     @Query(value = "select * from ordenes where id in (select max(id) from ordenes)", nativeQuery=true )
     Orden darUltimaOrden();
 
-    @Query(value = "SELECT * FROM ordenes WHERE bodega_destino = :bodega_destino AND estado = 'vigente'", nativeQuery=true )
-    Collection<Orden> darOrdenesXbodegaVigentes(@Param("bodega_destino") Long bodega);
+    @Query(value = "SELECT * FROM ordenes WHERE sucursal_destino = :sucursal_destino AND estado = 'vigente'", nativeQuery=true )
+    Collection<Orden> darOrdenesXsucursalVigentes(@Param("sucursal_destino") Long sucursal);
 
     @Query(value = "SELECT * FROM ordenes WHERE id= :id", nativeQuery=true)
     Orden darOrden(@Param("id") Long id);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO ordenes (id, estado, fecha_creacion, fecha_estimada, proveedor, bodega_destino) VALUES(paso.nextval, 'vigente', :fecha_creacion, :fecha_estimada, :proveedor, :bodega_destino)", nativeQuery = true)
+    @Query(value = "INSERT INTO ordenes (id, estado, fecha_creacion, fecha_estimada, proveedor, sucursal_destino) VALUES(paso.nextval, 'vigente', :fecha_creacion, :fecha_estimada, :proveedor, :sucursal_destino)", nativeQuery = true)
     void insertarOrden(@Param("fecha_creacion")Date fecha_creacion, @Param("fecha_estimada")Date fecha_estimada, 
-    @Param("proveedor")Long proveedor, @Param("bodega_destino")Long bodega_destino);
+    @Param("proveedor")Long proveedor, @Param("sucursal_destino")Long sucursal_destino);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE ordenes SET estado=:'anulada', fecha_estimada=:fecha_estimada,fecha_llegada=:fecha_llegada,fecha_creacion=:fecha_creacion,proveedor=:proveedor,bodega_destino=:bodega_destino WHERE id = :id AND estado IS NOT 'entregada' ", nativeQuery = true)
-    void actualizarOrdenAnulada(@Param("id") Long id, @Param("fecha_estimada")Date fecha_estimada, @Param("fecha_llegada")Date fecha_llegada, @Param("fecha_creacion")Date fecha_creacion, 
-    @Param("proveedor")Long proveedor, @Param("bodega_destino")Long bodega_destino);
+    @Query(value = "UPDATE ordenes SET estado=:'anulada' WHERE id = :id AND estado IS NOT 'entregada' ", nativeQuery = true)
+    void actualizarOrdenAnulada(@Param("id") Long id);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE ordenes SET estado=:'entregada', fecha_estimada=:fecha_estimada,fecha_llegada=:fecha_llegada,fecha_creacion=:fecha_creacion,proveedor=:proveedor,bodega_destino=:bodega_destino WHERE id = :id AND estado IS NOT 'anulada' ", nativeQuery = true)
-    void actualizarOrdenEntregada(@Param("id") Long id, @Param("fecha_estimada")Date fecha_estimada, @Param("fecha_llegada")Date fecha_llegada, @Param("fecha_creacion")Date fecha_creacion, 
-    @Param("proveedor")Long proveedor, @Param("bodega_destino")Long bodega_destino);
+    @Query(value = "UPDATE ordenes SET estado=:'entregada' WHERE id = :id AND estado IS NOT 'anulada' ", nativeQuery = true)
+    void actualizarOrdenEntregada(@Param("id") Long id);
 
 
     @Modifying
