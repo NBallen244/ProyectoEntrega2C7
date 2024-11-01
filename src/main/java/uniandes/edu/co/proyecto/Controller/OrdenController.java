@@ -13,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import uniandes.edu.co.proyecto.modelo.Almacenaje;
-import uniandes.edu.co.proyecto.modelo.Bodega;
 import uniandes.edu.co.proyecto.modelo.Orden;
 import uniandes.edu.co.proyecto.modelo.ProductosOrden;
 import uniandes.edu.co.proyecto.repositorio.OfertaRepository;

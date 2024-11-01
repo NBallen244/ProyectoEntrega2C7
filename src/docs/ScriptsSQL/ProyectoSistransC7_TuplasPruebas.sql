@@ -25,28 +25,28 @@ insert into ciudades (nombre, id) values ('Semikarakorsk', 9);
 insert into ciudades (nombre, id) values ('Itambacuri', 10);
 
 --base sucursales random
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Onsgard', 1, '8', '957 Michigan Court', 2, '803391057');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Ruskin', 2, '6', '046 Kedzie Hill', 2, '839676064');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Hovde', 3, '77549', '4880 Hoepker Point', 3, '855610553');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Rigney', 4, '4', '837 Johnson Place', 5, '912388172');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Redwing', 5, '19', '6 Lien Junction', 1, '721465833');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Mendota', 6, '98', '3 Oneill Street', 1, '808734931');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Spohn', 7, '23', '224 Lien Point', 10, '614240346');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Shoshone', 8, '19549', '11476 Bluestem Drive', 9, '156879693');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Banding', 9, '21058', '0 Dryden Hill', 9, '392382624');
-insert into sucursales (nombre, id, tama�o, direccion, ciudad, telefono) values ('Shoshone', 10, '2702', '95343 Green Ridge Avenue', 5, '831449879');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Onsgard', 1, '8', '957 Michigan Court', 2, '803391057');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Ruskin', 2, '6', '046 Kedzie Hill', 2, '839676064');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Hovde', 3, '77549', '4880 Hoepker Point', 3, '855610553');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Rigney', 4, '4', '837 Johnson Place', 5, '912388172');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Redwing', 5, '19', '6 Lien Junction', 1, '721465833');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Mendota', 6, '98', '3 Oneill Street', 1, '808734931');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Spohn', 7, '23', '224 Lien Point', 10, '614240346');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Shoshone', 8, '19549', '11476 Bluestem Drive', 9, '156879693');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Banding', 9, '21058', '0 Dryden Hill', 9, '392382624');
+insert into sucursales (nombre, id, tamaño, direccion, ciudad, telefono) values ('Shoshone', 10, '2702', '95343 Green Ridge Avenue', 5, '831449879');
 
 --base bodegas random
-insert into bodegas (id, tama�o, nombre, sucursal) values (1, '3805', 'Little Purple Monkeyflower', 1);
-insert into bodegas (id, tama�o, nombre, sucursal) values (2, '2', 'Melaspilea Lichen', 2);
-insert into bodegas (id, tama�o, nombre, sucursal) values (3, '198', 'Oregon Checkerbloom', 3);
-insert into bodegas (id, tama�o, nombre, sucursal) values (4, '3', 'Longleaf Groundcherry', 10);
-insert into bodegas (id, tama�o, nombre, sucursal) values (5, '2594', 'Lemmon''s Poppy', 5);
-insert into bodegas (id, tama�o, nombre, sucursal) values (6, '6', 'Fendler''s Drymary', 5);
-insert into bodegas (id, tama�o, nombre, sucursal) values (7, '55', 'Mountain Arnica', 1);
-insert into bodegas (id, tama�o, nombre, sucursal) values (8, '710', 'Star Sedge', 8);
-insert into bodegas (id, tama�o, nombre, sucursal) values (9, '4921', 'Mucronate Sprangletop', 8);
-insert into bodegas (id, tama�o, nombre, sucursal) values (10, '645', 'Small Matweed', 10);
+insert into bodegas (id, tamaño, nombre, sucursal) values (1, '3805', 'Little Purple Monkeyflower', 1);
+insert into bodegas (id, tamaño, nombre, sucursal) values (2, '2', 'Melaspilea Lichen', 2);
+insert into bodegas (id, tamaño, nombre, sucursal) values (3, '198', 'Oregon Checkerbloom', 3);
+insert into bodegas (id, tamaño, nombre, sucursal) values (4, '3', 'Longleaf Groundcherry', 10);
+insert into bodegas (id, tamaño, nombre, sucursal) values (5, '2594', 'Lemmon''s Poppy', 5);
+insert into bodegas (id, tamaño, nombre, sucursal) values (6, '6', 'Fendler''s Drymary', 5);
+insert into bodegas (id, tamaño, nombre, sucursal) values (7, '55', 'Mountain Arnica', 1);
+insert into bodegas (id, tamaño, nombre, sucursal) values (8, '710', 'Star Sedge', 8);
+insert into bodegas (id, tamaño, nombre, sucursal) values (9, '4921', 'Mucronate Sprangletop', 8);
+insert into bodegas (id, tamaño, nombre, sucursal) values (10, '645', 'Small Matweed', 10);
 
 --categorias
 insert into categorias (codigo, nombre, descripcion, caracteristicas) values (1, 'Ventosanzap', 'CEFTRIAXONE', 'BenQ-Siemens');

@@ -23,7 +23,7 @@ create table ciudades (
 create table sucursales (
     id number(5,0),
     nombre varchar(50) not null ,
-    tama�o number(5,0) not null,
+    tamaño number(5,0) not null,
     ciudad number(5,0) not null,
     telefono number (10,0) not null,
     direccion varchar(50) not null,
@@ -35,7 +35,7 @@ create table sucursales (
 create table bodegas(
     id number(5,0),
     nombre varchar(50) not null ,
-    tama�o number(5,0) not null,
+    tamaño number(5,0) not null,
     sucursal number(5,0) not null,
     primary key(id),
     foreign key (sucursal) references sucursales(id)
