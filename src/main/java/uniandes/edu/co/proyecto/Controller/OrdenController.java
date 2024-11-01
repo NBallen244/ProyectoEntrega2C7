@@ -3,15 +3,20 @@ package uniandes.edu.co.proyecto.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import uniandes.edu.co.proyecto.modelo.Almacenaje;
+import uniandes.edu.co.proyecto.modelo.Bodega;
 import uniandes.edu.co.proyecto.modelo.Orden;
+import uniandes.edu.co.proyecto.modelo.ProductosOrden;
 import uniandes.edu.co.proyecto.repositorio.OfertaRepository;
 import uniandes.edu.co.proyecto.repositorio.OfertaRepository.ProductosProveedor;
 import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
@@ -44,8 +49,18 @@ public class OrdenController {
     }
 
     @GetMapping("/ordenes/{id}")
-    public Collection<Orden> getOrdenDetallada(@PathVariable("id")Long id){
-        return ordenRepository.darOrdenes();
+    public ResponseEntity<?> getDetallesOrden(@PathVariable("id") Long id) {
+        try {
+            Collection<ProductosOrden> productos = productosOrdenRepository.darProductosXOrden(id);
+            Orden orden=ordenRepository.darOrden(id);
+            Map<String, Object> response = new HashMap<>();
+            response.put("orden", orden);
+            response.put("Productos", productos);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/ordenes/new/save")

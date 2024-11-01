@@ -19,6 +19,9 @@ public interface ProductosOrdenRepository extends JpaRepository<ProductosOrden, 
     @Query(value = "SELECT * FROM productosOrden WHERE orden = :orden AND producto = :producto", nativeQuery = true)
     ProductosOrden darProductosOrden(@Param("orden") Long orden, @Param("producto") Long producto);
 
+    @Query(value = "SELECT * FROM productosOrden WHERE orden = :orden", nativeQuery = true)
+    Collection<ProductosOrden> darProductosXOrden(@Param("orden") Long orden);
+
 
     @Modifying
     @Transactional
