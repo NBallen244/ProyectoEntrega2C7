@@ -2,23 +2,20 @@ package uniandes.edu.co.proyecto.modelo;
 
 import java.sql.Date;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="registros")
 public class Registro {
 
-    @Id
-    @OneToOne
-    @JoinColumn(name = "orden", referencedColumnName = "id")
-    private Orden orden;
+    @EmbeddedId
+    private RegistroPK pk;
 
-    private Date fechaIngreso;
+    private Date fecha_ingreso;
 
     @ManyToOne
     @JoinColumn(name = "bodega", referencedColumnName = "id")
@@ -28,25 +25,25 @@ public class Registro {
     public Registro(){;}
 
     public Registro(Orden orden, Date fechaIngreso, Bodega bodega){
-        this.fechaIngreso = fechaIngreso;
-        this.orden = orden;
+        this.fecha_ingreso = fechaIngreso;
+        this.pk = new RegistroPK(orden);
         this.bodega = bodega;
     }
 
     public Orden getOrden() {
-        return orden;
+        return this.pk.getOrden();	
     }
 
     public void setOrden(Orden orden) {
-        this.orden = orden;
+        this.pk = new RegistroPK(orden);
     }
 
-    public Date getFechaIngreso() {
-        return fechaIngreso;
+    public Date getFecha_ingreso() {
+        return fecha_ingreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
+    public void setFecha_ingreso(Date fechaIngreso) {
+        this.fecha_ingreso = fechaIngreso;
     }
 
     public Bodega getBodega() {

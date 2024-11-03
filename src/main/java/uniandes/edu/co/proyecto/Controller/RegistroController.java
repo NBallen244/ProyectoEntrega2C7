@@ -1,11 +1,19 @@
 package uniandes.edu.co.proyecto.controller;
 
-import java.sql.Date;
+import java.util.Date;
+
+
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +27,8 @@ import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository;
 import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.ProductosOrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.RegistroRepository;
+
+import java.sql.SQLException;
 
 
 @RestController
@@ -46,39 +56,41 @@ public class RegistroController {
     }
 
     @GetMapping("/registros/serial")
-    public ResponseEntity<Collection<Registro>> registros30Serial() {
+    @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = SQLException.class)
+    public ResponseEntity<Collection<Registro>> registros30Serial() throws SQLException {
         try {
-            registroRepository.sinAutoCommit();
-            Date fecha= new Date(System.currentTimeMillis()-30*24*60*60*1000);
+            Calendar fecha = Calendar.getInstance();
+            fecha.add(Calendar.DAY_OF_MONTH, -30);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaInput=df.format(fecha.getTime());
             Thread.sleep(60*1000);
-            Collection<Registro> registros = registroRepository.registrosMesSR(fecha);
-            registroRepository.confirmar();
+            Collection<Registro> registros = registroRepository.registrosMesSR(fechaInput);
             return ResponseEntity.ok(registros);
         } catch (Exception e) {
-            registroRepository.anular();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new SQLException("Error en la lectura de los registros");
         }
     }
 
     @GetMapping("/registros/committed")
-    public ResponseEntity<Collection<Registro>> registros30Commited() {
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
+    public ResponseEntity<Collection<Registro>> registros30Commited() throws SQLException {
         try {
-            registroRepository.sinAutoCommit();
-            Date fecha= new Date(System.currentTimeMillis()-30*24*60*60*1000);
+            Calendar fecha = Calendar.getInstance();
+            fecha.add(Calendar.DAY_OF_MONTH, -30);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaInput=df.format(fecha.getTime());
             Thread.sleep(60*1000);
-            Collection<Registro> registros = registroRepository.registrosMesRC(fecha);
-            registroRepository.confirmar();
+            Collection<Registro> registros = registroRepository.registrosMesRC(fechaInput);
             return ResponseEntity.ok(registros);
         } catch (Exception e) {
-            registroRepository.anular();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new SQLException("Error en la lectura de los registros");
         }
     }
     
     @PostMapping("/registros/new/save")
-    public ResponseEntity<?> registroGuardar(@RequestBody Registro registro) {
+    @Transactional(rollbackFor = SQLException.class)
+    public ResponseEntity<?> registroGuardar(@RequestBody Registro registro) throws SQLException {
         try {
-            registroRepository.sinAutoCommit();
             Date hoy= new Date(System.currentTimeMillis());
             Orden ordenAsociada = ordenRepository.darOrden(registro.getOrden().getId());
             //*Revisamos que los datos de la orden sean correctos con respecto a los del ingreso */
@@ -95,10 +107,10 @@ public class RegistroController {
             else if (ordenAsociada.getEstado().equals("anulada")) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La orden fue anulada");
             }
-            else if (registro.getFechaIngreso().before(ordenAsociada.getFecha_creacion()) || registro.getFechaIngreso().before(hoy)) {
+            else if (registro.getFecha_ingreso().before(ordenAsociada.getFecha_creacion()) || registro.getFecha_ingreso().before(hoy)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La fecha de ingreso no puede ser anterior a la fecha de creacion de la orden y/o la actual");
             }
-            registroRepository.insertarRegistro(registro.getOrden().getId(), registro.getFechaIngreso(), registro.getBodega().getId());
+            registroRepository.insertarRegistro(registro.getOrden().getId(), registro.getFecha_ingreso(), registro.getBodega().getId());
             Long bodega=registro.getBodega().getId();
 
             //**Agregamos cada producto a la bodega seleccionada */
@@ -120,19 +132,16 @@ public class RegistroController {
                 Long precioActual=datosProducto.getCosto_promedio();
                 Long nuevacantidad=cantidadActual+productoOrden.getCantidad();
                 if (nuevacantidad>datosProducto.getCapacidad()) {
-                    registroRepository.anular();
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad de productos en la bodega excede el limite de capacidad de esta");
+                    throw new SQLException(String.format("La cantidad de productos %d a ingresar supera la capacidad de la bodega %d", producto, bodega));
                 }
                 Long nuevoprecioProm=(cantidadActual*precioActual+productoOrden.getCantidad()*productoOrden.getPrecio_acordado())/(cantidadActual+productoOrden.getCantidad());
                 almacenajeRepository.actualizarConIngreso(bodega, producto, nuevacantidad, nuevoprecioProm);
                 }
             }
             ordenRepository.actualizarOrdenEntregada(ordenAsociada.getId());
-            registroRepository.confirmar();
             return ResponseEntity.status(HttpStatus.CREATED).body("Registro de ingreso exitoso");
         } catch (Exception e) {
-            registroRepository.anular();
-            return new ResponseEntity<>("Error al ingresar productos a la bodega", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new SQLException("Error en al registrar el ingreso");
         }
     }
 }

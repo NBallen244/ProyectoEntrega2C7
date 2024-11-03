@@ -47,6 +47,8 @@ insert into bodegas (id, tamaño, nombre, sucursal) values (7, '55', 'Mountain A
 insert into bodegas (id, tamaño, nombre, sucursal) values (8, '710', 'Star Sedge', 8);
 insert into bodegas (id, tamaño, nombre, sucursal) values (9, '4921', 'Mucronate Sprangletop', 8);
 insert into bodegas (id, tamaño, nombre, sucursal) values (10, '645', 'Small Matweed', 10);
+insert into bodegas (id, tamaño, nombre, sucursal) values (11, '645', 'Small Matweed', 6);
+insert into bodegas (id, tamaño, nombre, sucursal) values (12, '645', 'Small Matweed', 9);
 
 --categorias
 insert into categorias (codigo, nombre, descripcion, caracteristicas) values (1, 'Ventosanzap', 'CEFTRIAXONE', 'BenQ-Siemens');
@@ -126,17 +128,17 @@ insert into ofertas (proveedor, producto) values ('7', '3');
 
 --ordenes
 
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (1, '4', '2024-05-28', '2024-01-08', '8', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (1, '4', '2024-05-28', '2024-01-08', '8', 'entregada');
 insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (2, '4', '2024-09-20', '2023-12-11', '7', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (3, '7', '2023-10-27', '2024-05-24', '2', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (3, '7', '2023-10-27', '2024-05-24', '2', 'entregada');
 insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (4, '2', '2024-02-09', '2024-08-04', '2', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (5, '2', '2024-07-31', '2024-08-06', '3', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (5, '2', '2024-07-31', '2024-08-06', '3', 'entregada');
 insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (6, '9', '2024-02-29', '2024-07-26', '6', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (7, '4', '2024-04-28', '2024-04-17', '6', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (7, '4', '2024-04-28', '2024-04-17', '6', 'entregada');
 insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (8, '3', '2024-09-20', '2023-10-22', '6', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (9, '3', '2024-02-16', '2023-12-22', '1', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (9, '3', '2024-02-16', '2023-12-22', '1', 'entregada');
 insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (10, '1', '2024-09-19', '2023-12-29', '7', 'vigente');
-insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (11, '8', '2024-04-28', '2023-11-27', '9', 'vigente');
+insert into ordenes (id, proveedor, fecha_creacion, fecha_estimada, sucursal_destino, estado) values (11, '8', '2024-04-28', '2023-11-27', '9', 'entregada');
 --productos ordenes
 
 insert into productosOrden (orden, producto, cantidad, precio_acordado) values (1, 9, '410', '108');
@@ -151,5 +153,12 @@ insert into productosorden (orden, producto, cantidad, precio_acordado) values (
 insert into productosorden (orden, producto, cantidad, precio_acordado) values (10, 4, '799', '250');
 insert into productosorden (orden, producto, cantidad, precio_acordado) values (11, 1, '225', '743');
 insert into productosorden (orden, producto, cantidad, precio_acordado) values (10, 5, '680', '141');
+
+insert into registros (orden, fecha_ingreso, bodega) values (1, '2024-10-24', 8);
+insert into registros (orden, fecha_ingreso, bodega) values (3, '2024-10-19', 2);
+insert into registros (orden, fecha_ingreso, bodega) values (5, '2024-09-03', 3);
+insert into registros (orden, fecha_ingreso, bodega) values (7, '2024-10-20', 11);
+insert into registros (orden, fecha_ingreso, bodega) values (9, '2024-10-13', 1);
+insert into registros (orden, fecha_ingreso, bodega) values (11, '2024-09-27', 12);
 
 commit;

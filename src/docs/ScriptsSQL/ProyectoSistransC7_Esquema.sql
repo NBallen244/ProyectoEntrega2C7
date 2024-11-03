@@ -120,7 +120,7 @@ create table productosOrden (
 
 create table registros(
     orden number(5,0),
-    fechaIngreso date not null,
+    fecha_ingreso date not null,
     bodega number(5,0) not null,
     primary key (orden),
     foreign key (orden) references ordenes(id)

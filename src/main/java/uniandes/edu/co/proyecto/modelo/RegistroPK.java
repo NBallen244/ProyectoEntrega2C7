@@ -4,30 +4,30 @@ import java.io.Serializable;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Embeddable
 public class RegistroPK implements Serializable {
 
-    @ManyToOne
-    @JoinColumn(name = "ordenes", referencedColumnName = "id")
-    private Orden ordenDeCompra;
+    @OneToOne
+    @JoinColumn(name = "orden", referencedColumnName = "id")
+    private Orden orden;
 
     public RegistroPK(){
         super();
     }
 
-    public RegistroPK(Orden ordenDeCompra){
+    public RegistroPK(Orden orden){
         super();
-        this.ordenDeCompra = ordenDeCompra;
+        this.orden = orden;
     }
 
-    public Orden getOrdenDeCompra() {
-        return ordenDeCompra;
+    public Orden getOrden() {
+        return orden;
     }
 
-    public void setOrdenDeCompra(Orden ordenDeCompra) {
-        this.ordenDeCompra = ordenDeCompra;
+    public void setOrden(Orden ordenDeCompra) {
+        this.orden = ordenDeCompra;
     }
 
     
