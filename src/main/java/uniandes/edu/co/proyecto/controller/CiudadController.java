@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.controller;
+package uniandes.edu.co.proyecto.Controller;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Ciudad;
-import uniandes.edu.co.proyecto.repositorio.CiudadRepository;
+import uniandes.edu.co.proyecto.Repositorio.CiudadRepository;
 
 @RestController
 public class CiudadController {

@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.controller;
+package uniandes.edu.co.proyecto.Controller;
 
 import java.util.Collection;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Proveedor;
-import uniandes.edu.co.proyecto.repositorio.ProveedorRepository;
+import uniandes.edu.co.proyecto.Repositorio.ProveedorRepository;
 
 
 @RestController

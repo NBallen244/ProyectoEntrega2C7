@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.repositorio;
+package uniandes.edu.co.proyecto.Repositorio;
 
 import java.sql.Date;
 import java.util.Collection;

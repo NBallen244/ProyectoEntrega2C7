@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.controller;
+package uniandes.edu.co.proyecto.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Orden;
 import uniandes.edu.co.proyecto.modelo.ProductosOrden;
-import uniandes.edu.co.proyecto.repositorio.OfertaRepository;
-import uniandes.edu.co.proyecto.repositorio.OfertaRepository.ProductosProveedor;
-import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
-import uniandes.edu.co.proyecto.repositorio.ProductosOrdenRepository;
+import uniandes.edu.co.proyecto.Repositorio.OfertaRepository;
+import uniandes.edu.co.proyecto.Repositorio.OfertaRepository.ProductosProveedor;
+import uniandes.edu.co.proyecto.Repositorio.OrdenRepository;
+import uniandes.edu.co.proyecto.Repositorio.ProductosOrdenRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.controller;
+package uniandes.edu.co.proyecto.Controller;
 
 import java.util.Collection;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Categoria;
-import uniandes.edu.co.proyecto.repositorio.CategoriaRepository;
+import uniandes.edu.co.proyecto.Repositorio.CategoriaRepository;
 
 @RestController
 public class CategoriaController {
