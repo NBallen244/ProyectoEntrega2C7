@@ -90,7 +90,7 @@ public class RegistroController {
         }
     }
 
-    @GetMapping("/registros/committed")
+    @GetMapping("/registros/committed/{sucursal}/{bodega}")
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
     public ResponseEntity<?> registros30Commited(@PathVariable("bodega")Long bodega, @PathVariable("sucursal")Long sucursal) throws SQLException {
         try {
