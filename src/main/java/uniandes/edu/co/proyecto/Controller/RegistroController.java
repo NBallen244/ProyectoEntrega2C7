@@ -1,7 +1,5 @@
 package uniandes.edu.co.proyecto.controller;
 
-import java.util.Date;
-
 
 
 import java.text.DateFormat;
@@ -97,7 +95,6 @@ public class RegistroController {
     @Transactional(rollbackFor = SQLException.class)
     public ResponseEntity<?> registroGuardar(@RequestBody Registro registro, @RequestParam(required = true) Long orden) throws SQLException {
         try {
-            Date hoy= new Date(System.currentTimeMillis());
             Orden ordenAsociada = ordenRepository.darOrden(orden);
             Bodega bodegaAsociada = bodegaRepository.darBodega(registro.getBodega().getId());
             //*Revisamos que los datos de la orden sean correctos con respecto a los del ingreso */

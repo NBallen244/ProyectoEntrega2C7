@@ -2,12 +2,14 @@ package uniandes.edu.co.proyecto.repositorio;
 
 import java.util.Collection;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import uniandes.edu.co.proyecto.modelo.Registro;
 import uniandes.edu.co.proyecto.modelo.RegistroPK;
@@ -26,12 +28,12 @@ public interface RegistroRepository extends JpaRepository<Registro, RegistroPK>{
     void sinAutoCommit();
 
     //*RFC 6 */
-    
+    @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = SQLException.class)
     @Query(value = "SELECT * FROM registros where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery = true)
     Collection<Registro> registrosMesSR(@Param("fecha") String fecha);
     
     //*RFC 7 */
-    
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
     @Query(value = "SELECT * FROM registros where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery = true)
     Collection<Registro> registrosMesRC(@Param("fecha") String fecha);
 
