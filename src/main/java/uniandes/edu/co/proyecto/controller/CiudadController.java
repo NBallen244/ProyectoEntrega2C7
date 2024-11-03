@@ -33,6 +33,10 @@ public class CiudadController {
     @PostMapping("/ciudades/new/save")
     public ResponseEntity<?> ciudadGuardar(@RequestBody Ciudad ciudad) {
         try {
+            Collection<Ciudad> ciudadExistente = ciudadRepository.darCiudadNombre(ciudad.getNombre());
+            if (!ciudadExistente.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("La ciudad ya existe");
+            }
             ciudadRepository.insertarCiudad(ciudad.getNombre());
             return ResponseEntity.status(HttpStatus.CREATED).body("Ciudad creada exitosamente");
         } catch (Exception e) {

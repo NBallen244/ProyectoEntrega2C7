@@ -10,15 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import uniandes.edu.co.proyecto.modelo.Bodega;
-import uniandes.edu.co.proyecto.modelo.Almacenaje;
 
 public interface BodegaRepository extends JpaRepository<Bodega, Long>{
     @Query(value = "SELECT * FROM bodegas", nativeQuery = true)
     Collection<Bodega> darBodegas();
 
-    /*RFC3 */
-    @Query(value = "SELECT * FROM almacenajes WHERE almacenajes.bodega = :id", nativeQuery = true)
-    Collection<Almacenaje> darInventario (@Param("id") Long id);
 
     @Query(value = "SELECT * FROM bodegas WHERE id = :id", nativeQuery = true)
     Bodega darBodega(@Param("id") Long id);

@@ -19,7 +19,7 @@ public interface SucursalRepository extends JpaRepository<Sucursal, Long> {
     Sucursal darSucursal(@Param("id") int id);
 
     /*RFC4 */
-    @Query(value = "SELECT * FROM sucursales INNER JOIN bodegas ON bodegas.sucursal=sucursales.id INNER JOIN almacenajes on bodegas.id=almacenajes.bodega WHERE almacenajes.producto = :producto", nativeQuery = true)
+    @Query(value = "SELECT DISTINCT sucursales.* FROM sucursales INNER JOIN bodegas ON bodegas.sucursal=sucursales.id INNER JOIN almacenajes on bodegas.id=almacenajes.bodega WHERE almacenajes.producto = :producto", nativeQuery = true)
     Collection<Sucursal> darSucursalesConProducto(@Param("producto") long producto);
 
     @Modifying

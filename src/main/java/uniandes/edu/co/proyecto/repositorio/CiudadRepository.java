@@ -19,6 +19,9 @@ public interface CiudadRepository extends JpaRepository<Ciudad, Long>{
     @Query(value = "SELECT * FROM ciudades WHERE id = :id", nativeQuery = true)
     Ciudad darCiudad(@Param("id") Long id);
 
+    @Query(value = "SELECT * FROM ciudades WHERE nombre = :nombre", nativeQuery = true)
+    Collection<Ciudad> darCiudadNombre(@Param("nombre") String nombre);
+
 
     @Modifying
     @Transactional

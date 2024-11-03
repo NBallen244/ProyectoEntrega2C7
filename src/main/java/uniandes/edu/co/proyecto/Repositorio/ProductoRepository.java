@@ -54,7 +54,7 @@ public interface ProductoRepository extends JpaRepository <Producto, Long>{
         Long getSucursal();
         int getCantidad();
     }
-    @Query(value = "SELECT productos.cod_barras id, productos.nombre nombre, almacenajes.bodega bodega, ofertas.proveedor proveedor, bodegas.sucursal sucursal, almacenajes.cantidad cantidad FROM productos INNER JOIN almacenajes ON productos.cod_barras=almacenajes.producto INNER JOIN bodegas ON bodegas.id = almacenajes.bodega INNER JOIN ofertas ON productos.cod_barras=ofertas.producto WHERE almacenajes.cantidad<almacenajes.nivel_minimo", nativeQuery=true)
+    @Query(value = "SELECT DISTINCT productos.cod_barras id, productos.nombre nombre, almacenajes.bodega bodega, ofertas.proveedor proveedor, bodegas.sucursal sucursal, almacenajes.cantidad cantidad FROM productos INNER JOIN almacenajes ON productos.cod_barras=almacenajes.producto INNER JOIN bodegas ON bodegas.id = almacenajes.bodega INNER JOIN ofertas ON productos.cod_barras=ofertas.producto WHERE almacenajes.cantidad<almacenajes.nivel_minimo", nativeQuery=true)
     Collection<RespuestaInsuficiente> darProductoInsuficiente();
 
     @Modifying

@@ -21,6 +21,7 @@ import uniandes.edu.co.proyecto.repositorio.BodegaRepository;
 import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository;
 import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository.RespuestaIndiceOcupacion;
+import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository.RespuestaInventario;
 
 @RestController
 public class BodegaController {
@@ -58,7 +59,7 @@ public class BodegaController {
     @GetMapping("/bodegas/{id}/inventario")
     public ResponseEntity<?> bodegaInventario(@PathVariable("id") Long id) {
         try {
-            Collection<Almacenaje> inventario = bodegaRepository.darInventario(id);
+            Collection<RespuestaInventario> inventario = almacenajeRepository.darInventarioBodega(id);
             Bodega bodega=bodegaRepository.darBodega(id);
             Map<String, Object> response = new HashMap<>();
             response.put("bodega", bodega);
@@ -86,7 +87,7 @@ public class BodegaController {
         try {
             Bodega bodega=bodegaRepository.darBodega(id);
             Collection<Orden> ordenesPosiblesBodega=ordenRepository.darOrdenesXsucursalVigentes(bodega.getSucursal().getId());
-            Collection<Almacenaje> inventario = bodegaRepository.darInventario(id);
+            Collection<Almacenaje> inventario = almacenajeRepository.darAlmacenajesPorBodega(id);
             if (ordenesPosiblesBodega.size()==0 && inventario.size()==0){bodegaRepository.eliminarBodega(id);
             return ResponseEntity.ok("Bodega eliminada exitosamente");}
             else{return new ResponseEntity<>("No se puede eliminar la bodega-sucursal dueña tienes ordenes pendientes por recibir o aún hay inventario en la bodega.", HttpStatus.INTERNAL_SERVER_ERROR);}
