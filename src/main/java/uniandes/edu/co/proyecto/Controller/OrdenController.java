@@ -108,22 +108,36 @@ public class OrdenController {
     @PutMapping("/ordenes/{id}/edit/anular/save")
     public ResponseEntity<String> ordenAnularGuardar(@PathVariable("id")Long id){
         try{
+            Orden orden=ordenRepository.darOrden(id);
+            if(orden.getEstado().equals("entregada")){
+                return new ResponseEntity<>("Error al anular la orden-orden entregada", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            if(orden.getEstado().equals("anulada")){
+                return new ResponseEntity<>("Error al anular la orden-orden ya anulada", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             ordenRepository.actualizarOrdenAnulada(id);
-            return new ResponseEntity<>("Orden actualizada exitosamente", HttpStatus.OK);
+            return new ResponseEntity<>("Orden anulada exitosamente", HttpStatus.OK);
         }
         catch(Exception e){
-            return new ResponseEntity<>("Error al actualizar la orden-orden inexistente o entregada", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al anular la orden-orden inexistente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/ordenes/{id}/edit/entregar/save")
     public ResponseEntity<String> ordenEntregarGuardar(@PathVariable("id")Long id){
         try{
-            ordenRepository.actualizarOrdenEntregada(id);
-            return new ResponseEntity<>("Orden actualizada exitosamente", HttpStatus.OK);
+            Orden orden=ordenRepository.darOrden(id);
+            if(orden.getEstado().equals("entregada")){
+                return new ResponseEntity<>("Error al entregar la orden-orden ya entregada", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            if(orden.getEstado().equals("anulada")){
+                return new ResponseEntity<>("Error al entregar la orden-orden anulada", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            ordenRepository.actualizarOrdenAnulada(id);
+            return new ResponseEntity<>("Orden entregada exitosamente", HttpStatus.OK);
         }
         catch(Exception e){
-            return new ResponseEntity<>("Error al actualizar la orden-orden inexistente o anulada", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al entregar la orden-orden inexistente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
