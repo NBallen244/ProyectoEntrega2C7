@@ -3,6 +3,7 @@ package uniandes.edu.co.proyecto.repositorio;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -28,14 +29,14 @@ public interface RegistroRepository extends JpaRepository<Registro, RegistroPK>{
     void sinAutoCommit();
 
     public interface RespuestaConsultaMes{
-        Date getFecha();
+        Timestamp getFecha();
         Long getOrden();
-        Long getProovedor();
+        Long getProveedor();
     }
 
     //*RFC 6 */
     @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = SQLException.class)
-    @Query(value = "SELECT registros.fecha_ingreso fecha, ordenes.proveedor, registros.orden orden FROM registros inner join ordenes on ordenes.id = registros.orden where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD') AND bodega = :bodega", nativeQuery = true)
+    @Query(value = "SELECT registros.fecha_ingreso fecha, ordenes.proveedor proveedor, registros.orden orden FROM registros inner join ordenes on ordenes.id = registros.orden where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD') AND bodega = :bodega", nativeQuery = true)
     Collection<RespuestaConsultaMes> registrosMesSR(@Param("fecha") String fecha, @Param("bodega") Long bodega);
     
     //*RFC 7 */

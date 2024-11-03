@@ -78,13 +78,13 @@ public class RegistroController {
             fecha.add(Calendar.DAY_OF_MONTH, -30);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String fechaInput=df.format(fecha.getTime());
-            Thread.sleep(60*1000);
+            Thread.sleep(30*1000);
             Collection<RespuestaConsultaMes> registros = registroRepository.registrosMesSR(fechaInput, bodega);
             Map<String, Object> response = new HashMap<>();
             response.put("registros", registros);
             response.put("bodega", bodegaElegida.getNombre());
             response.put("sucursal", bodegaElegida.getSucursal().getNombre());
-            return ResponseEntity.ok(registros);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             throw new SQLException("Error en la lectura de los registros");
         }
@@ -105,13 +105,13 @@ public class RegistroController {
             fecha.add(Calendar.DAY_OF_MONTH, -30);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String fechaInput=df.format(fecha.getTime());
-            Thread.sleep(60*1000);
+            Thread.sleep(30*1000);
             Collection<RespuestaConsultaMes> registros = registroRepository.registrosMesRC(fechaInput, bodega);
             Map<String, Object> response = new HashMap<>();
             response.put("registros", registros);
             response.put("bodega", bodegaElegida.getNombre());
             response.put("sucursal", bodegaElegida.getSucursal().getNombre());
-            return ResponseEntity.ok(registros);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             throw new SQLException("Error en la lectura de los registros");
         }
