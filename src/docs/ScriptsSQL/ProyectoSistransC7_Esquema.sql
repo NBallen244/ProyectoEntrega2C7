@@ -1,6 +1,6 @@
 alter session set current_schema = ISIS2304C22202420;
 ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
-
+ALTER SEQUENCE paso RESTART START WITH 30;
 
 drop table registros;
 drop table productosOrden;

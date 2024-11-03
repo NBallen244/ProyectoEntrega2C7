@@ -1,6 +1,7 @@
 alter session set current_schema = ISIS2304C22202420;
 ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
 
+
 delete from productosorden;
 delete from ordenes;
 delete from ofertas;
