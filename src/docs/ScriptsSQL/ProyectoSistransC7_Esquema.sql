@@ -2,6 +2,7 @@ alter session set current_schema = ISIS2304C22202420;
 ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
 
 
+drop table registros;
 drop table productosOrden;
 drop table ordenes;
 drop table ofertas;
@@ -115,6 +116,14 @@ create table productosOrden (
     primary key (orden, producto),
     foreign key (orden) references ordenes(id),
     foreign key (producto) references productos(cod_barras)
+);
+
+create table registros(
+    orden number(5,0),
+    fechaIngreso date not null,
+    bodega number(5,0) not null,
+    primary key (orden),
+    foreign key (orden) references ordenes(id)
 );
 
 commit;

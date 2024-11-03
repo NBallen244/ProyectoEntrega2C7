@@ -23,4 +23,14 @@ public class ProductosOrdenPK {
         this.orden = orden;
         this.producto = producto;
     }
+
+    public Orden getOrden() {
+        return orden;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    
 }

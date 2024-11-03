@@ -68,10 +68,9 @@ public interface AlmacenajeRepository extends JpaRepository<Almacenaje, Almacena
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE almacenajes SET costo_promedio = :costo_promedio, capacidad = :capacidad, cantidad = :cantidad, nivel_minimo = :nivel_minimo WHERE bodega = :bodega AND producto = :producto", nativeQuery = true)
-    void actualizarAlmacenaje(@Param("bodega") Long bodega, @Param("producto") Long producto, @Param("capacidad") Long capacidad,
-                    @Param("cantidad") Long cantidad, @Param("costo_promedio") Long costo_promedio,
-                    @Param("nivel_minimo") Long nivel_minimo);
+    @Query(value = "UPDATE almacenajes SET costo_promedio = :costo_promedio, cantidad = :cantidad WHERE bodega = :bodega AND producto = :producto", nativeQuery = true)
+    void actualizarConIngreso(@Param("bodega") Long bodega, @Param("producto") Long producto,
+                    @Param("cantidad") Long cantidad, @Param("costo_promedio") Long costo_promedio);
 
     @Modifying
     @Transactional

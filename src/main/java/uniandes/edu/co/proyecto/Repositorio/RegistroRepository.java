@@ -7,18 +7,39 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import uniandes.edu.co.proyecto.modelo.Orden;
 import uniandes.edu.co.proyecto.modelo.Registro;
-import uniandes.edu.co.proyecto.modelo.RegistroPK;
 
-public interface RegistroRepository extends JpaRepository<Registro, RegistroPK>{
+public interface RegistroRepository extends JpaRepository<Registro, Orden>{
     @Query(value = "SELECT * FROM registros", nativeQuery = true)
-        Collection<Registro> darRegistros();
+    Collection<Registro> darRegistros();
 
-   @Modifying
+    @Query(value = "COMMIT", nativeQuery = true)
+    void confirmar();
+
+    @Query(value = "ROLLBACK", nativeQuery = true)
+    void anular();
+
+    @Query(value = "SET AUTOCOMMIT OFF", nativeQuery = true)
+    void sinAutoCommit();
+
+    //*RFC 6 */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Query(value = "SELECT * FROM registros where fechaIngreso >= TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery = true)
+    Collection<Registro> registrosMesSR();
+    
+    //*RFC 7 */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Query(value = "SELECT * FROM registros where fechaIngreso >= TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery = true)
+    Collection<Registro> registrosMesRC();
+
+    //*RF 10 */
+    @Modifying
     @Transactional
-    @Query(value = "INSERT INTO registros (id_orden, fecha_ingreso, sucursal, bodega, proveedor) VALUES ( :id_orden , :fecha_ingreso, :sucursal, :bodega, :proveedor)", nativeQuery = true)
-    void insertarRegistro(@Param("id_orden") Long id_orden, @Param("fecha_ingreso") Date fecha_ingreso, @Param("proveedor") Long proveedor,
-    @Param("bodega") Long bodega, @Param("sucursal") Long sucursal);
+    @Query(value = "INSERT INTO registros (orden, fechaIngreso, bodega) VALUES ( :orden , :fechaIngreso, :bodega)", nativeQuery = true)
+    void insertarRegistro(@Param("orden") Long orden, @Param("fechaIngreso") Date fecha_ingreso,
+    @Param("bodega") Long bodega);
 }
