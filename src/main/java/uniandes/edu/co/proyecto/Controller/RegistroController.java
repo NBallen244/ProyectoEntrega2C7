@@ -40,7 +40,7 @@ public class RegistroController {
     public ResponseEntity<?> registroGuardar(@RequestBody Registro registro) {
         try {
             registroRepository.insertarRegistro(registro.getRegistroPK().getOrdenDeCompra().getId(), registro.getFechaIngreso(), registro.getSucursal().getId(), registro.getBodega().getId(), registro.getProveedor().getNIT());;
-            return ResponseEntity.status(HttpStatus.CREATED).body("Bodega creada exitosamente");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Registro creada exitosamente");
         } catch (Exception e) {
             return new ResponseEntity<>("Error al crear la bodega", HttpStatus.INTERNAL_SERVER_ERROR);
         }
