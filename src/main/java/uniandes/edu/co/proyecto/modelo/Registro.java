@@ -27,7 +27,7 @@ public class Registro {
 
     public Registro(){;}
 
-    public Registro(Orden ordenDeCompra, Date fechaIngreso, Bodega bodega){
+    public Registro(Orden orden, Date fechaIngreso, Bodega bodega){
         this.fechaIngreso = fechaIngreso;
         this.orden = orden;
         this.bodega = bodega;
