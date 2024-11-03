@@ -58,6 +58,5 @@ public class CategoriaController {
             return new ResponseEntity<>("Error al crear la categoria", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    /*TODO consulta categoria por id o nombre */
 
 }

@@ -34,12 +34,12 @@ public interface OrdenRepository extends JpaRepository<Orden, Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE ordenes SET estado=:'anulada' WHERE id = :id AND estado IS NOT 'entregada' ", nativeQuery = true)
+    @Query(value = "UPDATE ordenes SET estado = 'anulada' WHERE id = :id AND estado = 'vigente' ", nativeQuery = true)
     void actualizarOrdenAnulada(@Param("id") Long id);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE ordenes SET estado=:'entregada' WHERE id = :id AND estado IS NOT 'anulada' ", nativeQuery = true)
+    @Query(value = "UPDATE ordenes SET estado = 'entregada' WHERE id = :id AND estado = 'vigente' ", nativeQuery = true)
     void actualizarOrdenEntregada(@Param("id") Long id);
 
 
