@@ -44,6 +44,36 @@ public class RegistroController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/registros/serial")
+    public ResponseEntity<Collection<Registro>> registros30Serial() {
+        try {
+            registroRepository.sinAutoCommit();
+            Date fecha= new Date(System.currentTimeMillis()-30*24*60*60*1000);
+            Thread.sleep(60*1000);
+            Collection<Registro> registros = registroRepository.registrosMesSR(fecha);
+            registroRepository.confirmar();
+            return ResponseEntity.ok(registros);
+        } catch (Exception e) {
+            registroRepository.anular();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/registros/committed")
+    public ResponseEntity<Collection<Registro>> registros30Commited() {
+        try {
+            registroRepository.sinAutoCommit();
+            Date fecha= new Date(System.currentTimeMillis()-30*24*60*60*1000);
+            Thread.sleep(60*1000);
+            Collection<Registro> registros = registroRepository.registrosMesRC(fecha);
+            registroRepository.confirmar();
+            return ResponseEntity.ok(registros);
+        } catch (Exception e) {
+            registroRepository.anular();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     
     @PostMapping("/registros/new/save")
     public ResponseEntity<?> registroGuardar(@RequestBody Registro registro) {
