@@ -27,15 +27,21 @@ public interface RegistroRepository extends JpaRepository<Registro, RegistroPK>{
     @Query(value = "SET AUTOCOMMIT OFF", nativeQuery = true)
     void sinAutoCommit();
 
+    public interface RespuestaConsultaMes{
+        Date getFecha();
+        Long getOrden();
+        Long getProovedor();
+    }
+
     //*RFC 6 */
     @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = SQLException.class)
-    @Query(value = "SELECT * FROM registros where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery = true)
-    Collection<Registro> registrosMesSR(@Param("fecha") String fecha);
+    @Query(value = "SELECT registros.fecha_ingreso fecha, ordenes.proveedor, registros.orden orden FROM registros inner join ordenes on ordenes.id = registros.orden where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD') AND bodega = :bodega", nativeQuery = true)
+    Collection<RespuestaConsultaMes> registrosMesSR(@Param("fecha") String fecha, @Param("bodega") Long bodega);
     
     //*RFC 7 */
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
-    @Query(value = "SELECT * FROM registros where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD')", nativeQuery = true)
-    Collection<Registro> registrosMesRC(@Param("fecha") String fecha);
+    @Query(value = "SELECT registros.fecha_ingreso fecha, ordenes.proveedor, registros.orden orden FROM registros inner join ordenes on ordenes.id = registros.orden where fecha_ingreso >= TO_DATE(:fecha, 'YYYY-MM-DD') AND bodega = :bodega", nativeQuery = true)
+    Collection<RespuestaConsultaMes> registrosMesRC(@Param("fecha") String fecha, @Param("bodega") Long bodega);
 
     //*RF 10 */
     @Modifying

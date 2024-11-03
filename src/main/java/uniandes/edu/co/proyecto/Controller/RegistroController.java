@@ -6,6 +6,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +31,7 @@ import uniandes.edu.co.proyecto.repositorio.BodegaRepository;
 import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.ProductosOrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.RegistroRepository;
+import uniandes.edu.co.proyecto.repositorio.RegistroRepository.RespuestaConsultaMes;
 
 import java.sql.SQLException;
 
@@ -59,16 +63,27 @@ public class RegistroController {
         }
     }
 
-    @GetMapping("/registros/serial")
+    @GetMapping("/registros/serial/{sucursal}/{bodega}")
     @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = SQLException.class)
-    public ResponseEntity<Collection<Registro>> registros30Serial() throws SQLException {
+    public ResponseEntity<?> registros30Serial(@PathVariable("bodega")Long bodega, @PathVariable("sucursal")Long sucursal) throws SQLException {
         try {
+            Bodega bodegaElegida=bodegaRepository.darBodega(bodega);
+            if (bodegaElegida==null) {
+                throw new SQLException("La bodega no existe");
+            }
+            else if (bodegaElegida.getSucursal().getId()!=sucursal) {
+                throw new SQLException("La bodega no pertenece a la sucursal");
+            }
             Calendar fecha = Calendar.getInstance();
             fecha.add(Calendar.DAY_OF_MONTH, -30);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String fechaInput=df.format(fecha.getTime());
             Thread.sleep(60*1000);
-            Collection<Registro> registros = registroRepository.registrosMesSR(fechaInput);
+            Collection<RespuestaConsultaMes> registros = registroRepository.registrosMesSR(fechaInput, bodega);
+            Map<String, Object> response = new HashMap<>();
+            response.put("registros", registros);
+            response.put("bodega", bodegaElegida.getNombre());
+            response.put("sucursal", bodegaElegida.getSucursal().getNombre());
             return ResponseEntity.ok(registros);
         } catch (Exception e) {
             throw new SQLException("Error en la lectura de los registros");
@@ -77,14 +92,25 @@ public class RegistroController {
 
     @GetMapping("/registros/committed")
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = SQLException.class)
-    public ResponseEntity<Collection<Registro>> registros30Commited() throws SQLException {
+    public ResponseEntity<?> registros30Commited(@PathVariable("bodega")Long bodega, @PathVariable("sucursal")Long sucursal) throws SQLException {
         try {
+            Bodega bodegaElegida=bodegaRepository.darBodega(bodega);
+            if (bodegaElegida==null) {
+                throw new SQLException("La bodega no existe");
+            }
+            else if (bodegaElegida.getSucursal().getId()!=sucursal) {
+                throw new SQLException("La bodega no pertenece a la sucursal");
+            }
             Calendar fecha = Calendar.getInstance();
             fecha.add(Calendar.DAY_OF_MONTH, -30);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             String fechaInput=df.format(fecha.getTime());
             Thread.sleep(60*1000);
-            Collection<Registro> registros = registroRepository.registrosMesRC(fechaInput);
+            Collection<RespuestaConsultaMes> registros = registroRepository.registrosMesRC(fechaInput, bodega);
+            Map<String, Object> response = new HashMap<>();
+            response.put("registros", registros);
+            response.put("bodega", bodegaElegida.getNombre());
+            response.put("sucursal", bodegaElegida.getSucursal().getNombre());
             return ResponseEntity.ok(registros);
         } catch (Exception e) {
             throw new SQLException("Error en la lectura de los registros");
