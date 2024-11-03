@@ -114,7 +114,7 @@ public class RegistroController {
             else if (ordenAsociada.getEstado().equals("anulada")) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La orden fue anulada");
             }
-            else if (registro.getFecha_ingreso().before(ordenAsociada.getFecha_creacion()) || registro.getFecha_ingreso().after(hoy)) {
+            else if (registro.getFecha_ingreso().before(ordenAsociada.getFecha_creacion())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La fecha de ingreso no puede ser anterior a la fecha de creacion de la orden ni posterior a la actual");
             }
             registroRepository.insertarRegistro(orden, registro.getFecha_ingreso(), registro.getBodega().getId());
