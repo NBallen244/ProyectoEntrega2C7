@@ -1,50 +1,44 @@
 package uniandes.edu.co.proyecto.modelo;
 
-import java.util.Date;
+import java.sql.Date;
 
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="registros")
 public class Registro {
 
-    @EmbeddedId
-    private RegistroPK registroPK;
+    @Id
+    @OneToOne
+    @JoinColumn(name = "orden", referencedColumnName = "id")
+    private Orden orden;
 
     private Date fechaIngreso;
-
-    @ManyToOne
-    @JoinColumn(name = "proveedor", referencedColumnName = "nit")
-    private Proveedor proveedor;
 
     @ManyToOne
     @JoinColumn(name = "bodega", referencedColumnName = "id")
     private Bodega bodega;
 
-    @ManyToOne
-    @JoinColumn(name = "sucursal", referencedColumnName = "id")
-    private Sucursal sucursal;
 
     public Registro(){;}
 
-    public Registro(Orden ordenDeCompra, Sucursal sucursal, Date fechaIngreso, Bodega bodega, Proveedor proveedor){
-        this.sucursal = sucursal;
+    public Registro(Orden ordenDeCompra, Date fechaIngreso, Bodega bodega){
         this.fechaIngreso = fechaIngreso;
-        this.registroPK = new RegistroPK(ordenDeCompra);
+        this.orden = orden;
         this.bodega = bodega;
-        this.proveedor = proveedor;
     }
 
-    public RegistroPK getRegistroPK() {
-        return registroPK;
+    public Orden getOrden() {
+        return orden;
     }
 
-    public void setRegistroPK(RegistroPK registroPK) {
-        this.registroPK = registroPK;
+    public void setOrden(Orden orden) {
+        this.orden = orden;
     }
 
     public Date getFechaIngreso() {
@@ -55,14 +49,6 @@ public class Registro {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
-    }
-
     public Bodega getBodega() {
         return bodega;
     }
@@ -70,14 +56,7 @@ public class Registro {
     public void setBodega(Bodega bodega) {
         this.bodega = bodega;
     }
-
-    public Sucursal getSucursal() {
-        return sucursal;
-    }
-
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
-    }    
-
     
+    
+
 }
