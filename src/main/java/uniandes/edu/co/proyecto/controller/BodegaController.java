@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
 import java.util.Map;
@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import uniandes.edu.co.proyecto.modelo.Almacenaje;
 import uniandes.edu.co.proyecto.modelo.Bodega;
 import uniandes.edu.co.proyecto.modelo.Orden;
-import uniandes.edu.co.proyecto.Repositorio.BodegaRepository;
-import uniandes.edu.co.proyecto.Repositorio.OrdenRepository;
-import uniandes.edu.co.proyecto.Repositorio.AlmacenajeRepository;
-import uniandes.edu.co.proyecto.Repositorio.AlmacenajeRepository.RespuestaIndiceOcupacion;
+import uniandes.edu.co.proyecto.repositorio.BodegaRepository;
+import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
+import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository;
+import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository.RespuestaIndiceOcupacion;
+import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository.RespuestaInventario;
 
 @RestController
 public class BodegaController {

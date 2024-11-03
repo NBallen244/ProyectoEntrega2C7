@@ -1,4 +1,4 @@
-package uniandes.edu.co.proyecto.Controller;
+package uniandes.edu.co.proyecto.controller;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Sucursal;
-import uniandes.edu.co.proyecto.Repositorio.SucursalRepository;
+import uniandes.edu.co.proyecto.repositorio.SucursalRepository;
 
 @RestController
 public class SucursalesController {
