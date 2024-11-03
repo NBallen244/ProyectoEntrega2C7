@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,7 @@ public class ProveedoresController {
         }
     }
 
-    @PostMapping("/proveedores/{nit}/edit/save")
+    @PutMapping("/proveedores/{nit}/edit/save")
     public ResponseEntity<String> proveedorEditarGuardar(@PathVariable("nit") Long nit, @RequestBody Proveedor proveedor) {
         try {
             proveedorRepository.actualizarProveedor(nit, proveedor.getNombre(), proveedor.getContacto(), proveedor.getTel_contacto(), proveedor.getDireccion());
