@@ -30,16 +30,16 @@ public class Registro {
         this.bodega = bodega;
     }
 
-    public Orden getOrden() {
-        return this.pk.getOrden();	
-    }
-
-    public void setOrden(Orden orden) {
+    public void setPK(Orden orden) {
         this.pk = new RegistroPK(orden);
     }
 
     public Date getFecha_ingreso() {
         return fecha_ingreso;
+    }
+
+    public RegistroPK getPK() {
+        return this.pk;
     }
 
     public void setFecha_ingreso(Date fechaIngreso) {

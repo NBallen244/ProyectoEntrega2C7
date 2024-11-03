@@ -17,13 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import uniandes.edu.co.proyecto.modelo.Almacenaje;
+import uniandes.edu.co.proyecto.modelo.Bodega;
 import uniandes.edu.co.proyecto.modelo.Orden;
 import uniandes.edu.co.proyecto.modelo.ProductosOrden;
 import uniandes.edu.co.proyecto.modelo.Registro;
 import uniandes.edu.co.proyecto.repositorio.AlmacenajeRepository;
+import uniandes.edu.co.proyecto.repositorio.BodegaRepository;
 import uniandes.edu.co.proyecto.repositorio.OrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.ProductosOrdenRepository;
 import uniandes.edu.co.proyecto.repositorio.RegistroRepository;
@@ -44,6 +47,9 @@ public class RegistroController {
 
     @Autowired
     private ProductosOrdenRepository productosOrdenRepository;
+
+    @Autowired
+    private BodegaRepository bodegaRepository;
 
     @GetMapping("/registros")
     public ResponseEntity<Collection<Registro>> registros() {
@@ -89,15 +95,16 @@ public class RegistroController {
     
     @PostMapping("/registros/new/save")
     @Transactional(rollbackFor = SQLException.class)
-    public ResponseEntity<?> registroGuardar(@RequestBody Registro registro) throws SQLException {
+    public ResponseEntity<?> registroGuardar(@RequestBody Registro registro, @RequestParam(required = true) Long orden) throws SQLException {
         try {
             Date hoy= new Date(System.currentTimeMillis());
-            Orden ordenAsociada = ordenRepository.darOrden(registro.getOrden().getId());
+            Orden ordenAsociada = ordenRepository.darOrden(orden);
+            Bodega bodegaAsociada = bodegaRepository.darBodega(registro.getBodega().getId());
             //*Revisamos que los datos de la orden sean correctos con respecto a los del ingreso */
             if (ordenAsociada == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La orden no existe");
             }
-            else if(ordenAsociada.getSucursal_destino().getId() != registro.getBodega().getSucursal().getId()){
+            else if(ordenAsociada.getSucursal_destino().getId() != bodegaAsociada.getSucursal().getId()){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La bodega no pertenece a la sucursal de destino de la orden");
             }
             else if (ordenAsociada.getEstado().equals("entregada")) {
@@ -110,7 +117,7 @@ public class RegistroController {
             else if (registro.getFecha_ingreso().before(ordenAsociada.getFecha_creacion()) || registro.getFecha_ingreso().after(hoy)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La fecha de ingreso no puede ser anterior a la fecha de creacion de la orden ni posterior a la actual");
             }
-            registroRepository.insertarRegistro(registro.getOrden().getId(), registro.getFecha_ingreso(), registro.getBodega().getId());
+            registroRepository.insertarRegistro(orden, registro.getFecha_ingreso(), registro.getBodega().getId());
             Long bodega=registro.getBodega().getId();
 
             //**Agregamos cada producto a la bodega seleccionada */
