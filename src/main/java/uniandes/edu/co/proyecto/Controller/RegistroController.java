@@ -171,7 +171,7 @@ public class RegistroController {
             ordenRepository.actualizarOrdenEntregada(ordenAsociada.getId());
             return ResponseEntity.status(HttpStatus.CREATED).body("Registro de ingreso exitoso");
         } catch (Exception e) {
-            throw new SQLException("Error en al registrar el ingreso");
+            throw new SQLException(e.getMessage());
         }
     }
 }

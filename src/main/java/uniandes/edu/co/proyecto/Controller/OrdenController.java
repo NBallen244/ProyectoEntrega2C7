@@ -66,7 +66,7 @@ public class OrdenController {
         try{
             long[] id_productos= Arrays.stream(productos.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
             long[] val_precios= Arrays.stream(precios.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
-            long[] val_cantidades= Arrays.stream(productos.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
+            long[] val_cantidades= Arrays.stream(cantidades.split(",")).mapToLong(f -> Long.parseLong(f)).toArray();
             norden.setFechaCreacion(new Date(new java.util.Date().getTime()));
             if (norden.getFecha_estimada().compareTo(norden.getFecha_creacion())<0){
                 return new ResponseEntity<>("Fecha inválida, debe ser posterior a la actual", HttpStatus.CREATED);
