@@ -5,4 +5,6 @@ Instrucciones de Manejos:
 3. Ejecutar aplicacione
 4. Probar
 
-NOTA: Por dificultades técnicas no se pudo probar ocn postman en su momento. Sin embargo el json de la prueba (collection) se encuentra de iguak orma en la carpeta docs. (Desconocemos las causas exactas de los errores, mas sabemos que pueden haber sido en su momento a una saturacionde conexiones, en vista de que no se reconocía requests tan básicos como darBodegas que estaban claramente declarado). Por ello se incluyo un script SQL extra con dichas sentencias que nos e pudieron probar
+NOTA: existe la posibilidad que con la descarga de los archivos SQl, la definicion del atributo "tamaño" en bodega
+se vea afectada y no reconozca la "ñ". De ser el caso entrar al archivo de esquema, cambiar el caracter devuelta ñ
+y ejecutar. Hacer lo mismo con las tuplas ingresadas a la tablas en el script de tuplas de pruebas
